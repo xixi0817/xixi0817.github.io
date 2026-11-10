@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Xixi (Cecilia) Lin</title>
   <meta name="description" content="Xixi (Cecilia) Lin, Data Analyst. Baruch MSBA '27, Georgia Tech OMSCS.">
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --navy: #0b1f3a;
@@ -19,7 +19,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: "Inter", sans-serif;
+      font-family: "DM Sans", sans-serif;
       color: var(--text);
       background: var(--bg);
       line-height: 1.65;
@@ -38,7 +38,7 @@
       height: 60px;
     }
     nav .name {
-      font-family: "Source Serif 4", serif; font-weight: 600;
+      font-family: "DM Serif Display", serif; font-weight: 400;
       color: #fff; text-decoration: none; font-size: 18px;
     }
     nav ul { list-style: none; display: flex; gap: 24px; }
@@ -47,16 +47,19 @@
 
     /* Hero */
     header {
-      background: var(--navy);
+      background-color: var(--navy);
+      background-image: linear-gradient(rgba(11,31,58,0.55), rgba(11,31,58,0.75)), url("images/hero.jpg");
+      background-size: cover;
+      background-position: center;
       color: #fff;
-      padding: 90px 0 80px;
+      padding: 140px 0 110px;
     }
     .tag {
       color: var(--accent); letter-spacing: 3px; font-size: 13px;
       font-weight: 600; text-transform: uppercase;
     }
     header h1 {
-      font-family: "Source Serif 4", serif; font-weight: 600;
+      font-family: "DM Serif Display", serif; font-weight: 400;
       font-size: 44px; margin: 12px 0 10px; line-height: 1.2;
     }
     header p { color: #c9d2de; font-size: 18px; max-width: 600px; }
@@ -71,7 +74,7 @@
     /* Sections */
     section { padding: 64px 0; border-bottom: 1px solid var(--line); }
     h2 {
-      font-family: "Source Serif 4", serif; font-weight: 600;
+      font-family: "DM Serif Display", serif; font-weight: 400;
       font-size: 28px; color: var(--navy); margin-bottom: 24px;
     }
     section p + p { margin-top: 14px; }
@@ -101,11 +104,31 @@
     .item .where { color: var(--muted); font-size: 15px; }
     h2.sub { font-size: 20px; margin: 36px 0 8px; }
 
+    /* Life */
+    .life-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    }
+    .life-grid figure {
+      position: relative; margin: 0; aspect-ratio: 1 / 1;
+      border-radius: 10px; overflow: hidden;
+      background: var(--soft); border: 1px solid var(--line);
+    }
+    .life-grid img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .life-grid figcaption {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 28px 12px 10px; font-size: 13px; color: #fff;
+      background: linear-gradient(transparent, rgba(11,31,58,0.85));
+    }
+    #life h2::before {
+      content: ""; display: inline-block; width: 22px; height: 3px;
+      background: var(--accent); vertical-align: middle; margin-right: 14px;
+    }
+
     footer {
       background: var(--navy); color: #c9d2de;
       padding: 36px 0; font-size: 14px;
     }
-    footer strong { color: #fff; font-family: "Source Serif 4", serif; font-size: 17px; }
+    footer strong { color: #fff; font-family: "DM Serif Display", serif; font-size: 17px; }
 
     @media (max-width: 640px) {
       nav ul { gap: 14px; }
@@ -114,6 +137,7 @@
       header { padding: 60px 0 56px; }
       header h1 { font-size: 34px; }
       .item { grid-template-columns: 1fr; gap: 2px; }
+      .life-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 420px) {
       nav .name { display: none; }
@@ -131,6 +155,7 @@
         <li><a href="#projects">Projects</a></li>
         <li><a href="#education">Education</a></li>
         <li><a href="#resume">Resume</a></li>
+        <li><a href="#life">Life</a></li>
       </ul>
     </div>
   </nav>
@@ -227,12 +252,22 @@
         </div>
       </div>
     </section>
+    <section id="life">
+      <div class="wrap">
+        <h2>Life</h2>
+        <div class="life-grid">
+          <figure><img src="images/life1.jpg" alt="" onerror="this.remove()"><figcaption>Caption 1</figcaption></figure>
+          <figure><img src="images/life2.jpg" alt="" onerror="this.remove()"><figcaption>Caption 2</figcaption></figure>
+          <figure><img src="images/life3.jpg" alt="" onerror="this.remove()"><figcaption>Caption 3</figcaption></figure>
+          <figure><img src="images/life4.jpg" alt="" onerror="this.remove()"><figcaption>Caption 4</figcaption></figure>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
     <div class="wrap">
-      <strong>Xixi (Cecilia) Lin</strong> &nbsp;© 2026<br>
-      linxixi0817 [at] gmail [dot] com
+      <strong>Xixi (Cecilia) Lin</strong> &nbsp;© 2026
     </div>
   </footer>
 
