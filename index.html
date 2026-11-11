@@ -5,19 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Xixi (Cecilia) Lin</title>
   <meta name="description" content="Xixi (Cecilia) Lin, Data Analyst. Baruch MSBA '27, Georgia Tech OMSCS.">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     :root {
-      --navy: #0b1f3a;
+      --navy: #2f4a5c;
       --text: #1f2933;
       --muted: #5f6b7a;
-      --line: #e3e7ec;
+      --line: #dbe6ec;
       --bg: #ffffff;
-      --soft: #f5f7fa;
-      --accent: #b3955b;
+      --soft: #eef4f7;
+      --accent: #c9a46a;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 60px; }
     body {
       font-family: "DM Sans", sans-serif;
       color: var(--text);
@@ -30,9 +30,11 @@
 
     /* Nav */
     nav {
-      position: sticky; top: 0; z-index: 10;
-      background: rgba(11, 31, 58, 0.96);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+      background: transparent;
+      transition: background 0.3s ease;
     }
+    nav.scrolled { background: rgba(47, 74, 92, 0.96); }
     nav .wrap {
       display: flex; justify-content: space-between; align-items: center;
       height: 60px;
@@ -48,25 +50,25 @@
     /* Hero */
     header {
       background-color: var(--navy);
-      background-image: linear-gradient(rgba(11,31,58,0.30), rgba(11,31,58,0.60)), url("images/hero.jpg");
+      background-image: linear-gradient(180deg, rgba(47,74,92,0.05) 0%, rgba(47,74,92,0.25) 45%, rgba(47,74,92,0.85) 100%), url("images/hero.jpg");
       background-size: cover;
       background-position: center 65%;
       color: #fff;
       min-height: 70vh;
       min-height: 70svh;
-      display: flex; align-items: center;
+      display: flex; align-items: flex-end;
       padding: 80px 0;
     }
     header .wrap { width: 100%; }
     .tag {
-      color: var(--accent); letter-spacing: 3px; font-size: 13px;
+      color: #e3c48d; text-shadow: 0 1px 6px rgba(0,0,0,0.35); letter-spacing: 3px; font-size: 13px;
       font-weight: 600; text-transform: uppercase;
     }
     header h1 {
       font-family: "DM Serif Display", serif; font-weight: 400;
       font-size: 44px; margin: 12px 0 10px; line-height: 1.2;
     }
-    header p { color: #c9d2de; font-size: 18px; max-width: 600px; }
+    header p { color: #eef2f7; text-shadow: 0 1px 8px rgba(0,0,0,0.35); font-size: 18px; max-width: 600px; }
     .links { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
     .btn {
       display: inline-block; padding: 9px 18px; border-radius: 6px;
@@ -121,7 +123,7 @@
     .life-grid figcaption {
       position: absolute; left: 0; right: 0; bottom: 0;
       padding: 28px 12px 10px; font-size: 13px; color: #fff;
-      background: linear-gradient(transparent, rgba(11,31,58,0.85));
+      background: linear-gradient(transparent, rgba(47,74,92,0.85));
     }
     #life h2::before {
       content: ""; display: inline-block; width: 22px; height: 3px;
@@ -130,30 +132,102 @@
 
     footer {
       background: var(--navy); color: #c9d2de;
-      padding: 36px 0; font-size: 14px;
+      padding: 40px 0 60px; font-size: 14px;
     }
     footer strong { color: #fff; font-family: "DM Serif Display", serif; font-size: 17px; }
 
+    /* Menu button (phones only) */
+    .menu-btn {
+      display: none; background: none; border: 0; cursor: pointer;
+      width: 40px; height: 40px; margin-right: -8px; padding: 8px;
+    }
+    .menu-btn span {
+      display: block; height: 2px; background: #fff; border-radius: 2px;
+      margin: 5px 0; transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+    nav.open .menu-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    nav.open .menu-btn span:nth-child(2) { opacity: 0; }
+    nav.open .menu-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Phones: below iPad mini width */
+    @media (max-width: 743px) {
+      .menu-btn { display: block; }
+      nav.open { background: rgba(47, 74, 92, 0.35); }
+      nav.open.scrolled { background: rgba(47, 74, 92, 0.96); }
+      nav.open.scrolled ul { background: rgba(47, 74, 92, 0.96); }
+      nav ul {
+        display: none;
+        position: absolute; top: 60px; left: 0; right: 0;
+        flex-direction: column; align-items: stretch; gap: 0;
+        background: rgba(47, 74, 92, 0.35);
+        padding: 6px 0 10px;
+      }
+      nav.open ul { display: flex; }
+      header .wrap { transition: opacity 0.2s ease; }
+      nav.open ~ header .wrap { opacity: 0; }
+      nav ul a {
+        display: block; color: #fff; font-size: 15px; line-height: 1.2;
+        text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+        padding: 13px 20px;
+      }
+      nav ul a:hover, nav ul a:active { color: #fff; background: rgba(255, 255, 255, 0.18); }
+    }
+
     @media (max-width: 640px) {
-      nav ul { gap: 14px; }
-      nav ul a { font-size: 14px; }
       nav .name { font-size: 16px; }
       header { padding: 60px 0 56px; }
       header h1 { font-size: 34px; }
       .item { grid-template-columns: 1fr; gap: 2px; }
       .life-grid { grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-width: 420px) {
-      nav .name { display: none; }
-      nav .wrap { justify-content: center; }
+    /* Pixel intro screen */
+    #intro {
+      position: fixed; inset: 0; z-index: 100;
+      background: #f4f1ea; color: #1d2a33;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      font-family: "Press Start 2P", monospace; cursor: pointer;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
     }
+    #intro.done { opacity: 0; visibility: hidden; }
+    #intro .corner { position: absolute; width: 32px; height: 32px; border: 0 solid #1d2a33; }
+    #intro .c1 { top: 24px; left: 24px; border-top-width: 8px; border-left-width: 8px; }
+    #intro .c2 { top: 24px; right: 24px; border-top-width: 8px; border-right-width: 8px; }
+    #intro .c3 { bottom: 24px; left: 24px; border-bottom-width: 8px; border-left-width: 8px; }
+    #intro .c4 { bottom: 24px; right: 24px; border-bottom-width: 8px; border-right-width: 8px; }
+    #intro .ibar {
+      position: absolute; top: 30px; left: 72px;
+      width: min(240px, 50vw); height: 24px; padding: 3px;
+      border: 4px solid #1d2a33; display: flex; gap: 3px; background: #fff;
+    }
+    #intro .ibar span { flex: 1; }
+    #intro .ibar span.on { background: #2f4a5c; }
+    #intro canvas { image-rendering: pixelated; margin-bottom: 24px; }
+    #intro h2 {
+      font-family: "Press Start 2P", monospace; font-weight: 400; color: #1d2a33;
+      font-size: clamp(16px, 4.2vw, 40px); line-height: 1.5; text-align: center;
+      margin: 0 20px; letter-spacing: 1px;
+    }
+    #intro .pct { margin-top: 26px; font-size: 12px; color: #2f4a5c; }
+    #intro .skip { position: absolute; bottom: 34px; font-size: 10px; color: #8a8f94; animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
   </style>
 </head>
 <body id="top">
 
+  <div id="intro" aria-hidden="true">
+    <div class="corner c1"></div><div class="corner c2"></div>
+    <div class="corner c3"></div><div class="corner c4"></div>
+    <div class="ibar"></div>
+    <canvas id="introTower" width="32" height="49"></canvas>
+    <h2>THE PAGE IS<br>LOADING</h2>
+    <div class="pct"><span id="introPct">0%</span></div>
+    <div class="skip">CLICK TO SKIP</div>
+  </div>
+
   <nav>
     <div class="wrap">
       <a class="name" href="#top">Xixi (Cecilia) Lin</a>
+      <button class="menu-btn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
       <ul>
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
@@ -275,5 +349,130 @@
     </div>
   </footer>
 
+  <script>
+    (function () {
+      var nav = document.querySelector('nav');
+      var header = document.querySelector('header');
+      function update() {
+        var limit = header.offsetHeight - nav.offsetHeight;
+        nav.classList.toggle('scrolled', window.scrollY > limit);
+      }
+      var btn = document.querySelector('.menu-btn');
+      btn.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open);
+      });
+      nav.querySelectorAll('ul a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          nav.classList.remove('open');
+          btn.setAttribute('aria-expanded', false);
+        });
+      });
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+  </script>
+  <script>
+    (function () {
+      var intro = document.getElementById('intro');
+      if (!intro) return;
+      var seen = false;
+      try { seen = sessionStorage.getItem('introSeen') === '1'; } catch (e) {}
+      if (seen) { intro.remove(); return; }
+      document.documentElement.style.overflow = 'hidden';
+
+      var map = [
+        '....f...........................',
+        '...fFf..........................',
+        '..fFFFff........................',
+        '.fFFFFFff.......................',
+        '.KfFFFFfK.......................',
+        'KTffffffTK......................',
+        'KTTTTTTTTK......................',
+        '.KKTTTTKK.......................',
+        '..KTTTTK........................',
+        '..KTTTTK.........K..............',
+        '..KWWWWK......K..R..K...........',
+        '.KWWWWWWK..K..R..R..R..K........',
+        'KWWWWWWWWK.R..R..R..R..R.K......',
+        'KWWGWGWWWWKR..RKKRKKR..RKWK.....',
+        '.KWWWWWWKWWRKKRWWRWWRKKRWWK.....',
+        '.KRWWWWRKWWRRRRRRRRRRRRRWWK.....',
+        '.KRRRRRRKWPRRRRRRRRRRRRRPWK.....',
+        '.KRRrRRRKWWrrrrrrrrrrrrrWWK.....',
+        '..KRrRRRRWWWWWWWWWWWWWWWWWK.....',
+        '..KRrRRRRWWWWWDWDWDWDWWWWWK.....',
+        '..KRRrRRWWWWWWWDWDWDWWWWWWWK....',
+        '..KRRrRRWWWWWWWWWWWWWWWWWWWK....',
+        '...KRrRRWWWWWEEWWWWWWEEWWWWK....',
+        '...KRrRRWGWWEKEWWWWWEKEWWGWK....',
+        '...KRRrRWWGWEEEWWWWWEEEWGWWK....',
+        '...KRRrRWWWWWWWWWWWWWWWWWWWK....',
+        '....KRrRRGWWWWWWPPPWWWWWWGK.....',
+        '....KRrRGGGGWWWWWKWWWWWGGGGK....',
+        '....KRRrRRGWWWWWKWKWWWWWGKK.....',
+        '....KRRrRRRWWWWWWWWWWWWWKKKKKKK.',
+        '.....KRrRRRRWWWWWWWWWWWKKSSSSSSK',
+        '.....KRRRRRRRWWWWWWWWWRRRSSSSSSK',
+        '.....KRRRRRRRRWWWWWWWRRRRSGGGGSK',
+        '.....KRRRRRRRRRWWWWWRRRWWWSSSSSK',
+        '.....KRRRRRRRRRRWWWRRRWWWWWSSSSK',
+        '.....KRRRRRRRRRRRWRRRRWWWWWGGGSK',
+        '.....KRRrRRRrRRRrRRRrRRWWWSSSSSK',
+        '....KRRRrRRRrRRRrRRRrRRRrSSSSSSK',
+        '....KRRRrRRRrRRRrRRRrRRRrSSSSSSK',
+        '....KRRRrRRRrRRRrRRRrRRRrSSSSSSK',
+        '...KRRRrRRRrRRRRRrRRRrRRRSSSSSSK',
+        '...KRRRrRRRrRRRRRrRRRrRRRrRRRKK.',
+        '...KRRRrRRRrRRRRRrRRRrRRRrRRRK..',
+        '...KRRRrRRRrRRRRRrRRRrRRRrRRRK..',
+        '..KRRRRrRRRrRRRRRrRRRrRRRrRRRRK.',
+        '..KRRRRRRRRRRRRRRRRRRRRRRRRRRRK.',
+        '...KSSSSSSSSSSSSSSSSSSSSSSSSSK..',
+        '...KSSSSSSSSSSSSSSSSSSSSSSSSSK..',
+        '....KKKKKKKKKKKKKKKKKKKKKKKKK...'
+      ];
+      var pal = {
+        K: '#2a2f36', W: '#ece7df', G: '#b8b2aa', D: '#8c8782', E: '#4f9aa8', P: '#e6a3a6',
+        R: '#6fa89a', r: '#4e8577', F: '#f6c454', f: '#e8743b', T: '#a9844a', S: '#c9c3b8'
+      };
+      var cv = document.getElementById('introTower');
+      var scale = Math.max(3, Math.min(6, Math.floor(Math.min(window.innerWidth * 0.4 / 32, (window.innerHeight - 380) / 49))));
+      cv.style.width = (32 * scale) + 'px';
+      cv.style.height = (49 * scale) + 'px';
+      var ctx = cv.getContext('2d');
+      map.forEach(function (row, y) {
+        for (var x = 0; x < row.length; x++) {
+          var c = pal[row[x]];
+          if (c) { ctx.fillStyle = c; ctx.fillRect(x, y, 1, 1); }
+        }
+      });
+
+      var bar = intro.querySelector('.ibar');
+      var n = 16, segs = [];
+      for (var i = 0; i < n; i++) { var sp = document.createElement('span'); bar.appendChild(sp); segs.push(sp); }
+      var pct = document.getElementById('introPct');
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var k = 0;
+      var timer = setInterval(function () {
+        segs[k].classList.add('on');
+        k++;
+        pct.textContent = Math.round(k / n * 100) + '%';
+        if (k >= n) { clearInterval(timer); setTimeout(finish, 800); }
+      }, reduce ? 20 : 220);
+
+      function finish() {
+        if (intro.classList.contains('done')) return;
+        clearInterval(timer);
+        try { sessionStorage.setItem('introSeen', '1'); } catch (e) {}
+        intro.classList.add('done');
+        document.documentElement.style.overflow = '';
+        setTimeout(function () { intro.remove(); }, 600);
+      }
+      intro.addEventListener('click', finish);
+      document.addEventListener('keydown', finish, { once: true });
+    })();
+  </script>
 </body>
 </html>
