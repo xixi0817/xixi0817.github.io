@@ -156,15 +156,15 @@
     /* Menu button (phones only) */
     .menu-btn {
       display: none; background: none; border: 0; cursor: pointer;
-      width: 40px; height: 40px; margin-right: -8px; padding: 8px;
+      width: 36px; height: 36px; margin-right: -9px; padding: 11px 9px;
     }
     .menu-btn span {
-      display: block; height: 2px; background: #fff; border-radius: 2px;
-      margin: 5px 0; transition: transform 0.25s ease, opacity 0.2s ease;
+      display: block; height: 1.5px; background: #fff; border-radius: 2px;
+      margin: 0 0 4px; transition: transform 0.25s ease, opacity 0.2s ease;
     }
-    nav.open .menu-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    nav.open .menu-btn span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
     nav.open .menu-btn span:nth-child(2) { opacity: 0; }
-    nav.open .menu-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    nav.open .menu-btn span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
 
     /* Phones: below iPad mini width */
     @media (max-width: 743px) {
@@ -197,7 +197,7 @@
 
     @media (max-width: 640px) {
       nav .name { font-size: 16px; }
-      header { padding: 60px 0 56px; }
+      header { padding: 60px 0 56px; min-height: 88vh; min-height: 88svh; }
       header h1 { font-size: 34px; }
       .item { grid-template-columns: 1fr; gap: 2px; }
       .life-grid { grid-template-columns: repeat(2, 1fr); }
