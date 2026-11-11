@@ -204,13 +204,28 @@
     #intro canvas { image-rendering: pixelated; margin-bottom: 24px; }
     #intro h2 {
       font-family: "Press Start 2P", monospace; font-weight: 400; color: #1d2a33;
-      font-size: clamp(16px, 4.2vw, 40px); line-height: 1.5; text-align: center;
+      font-size: clamp(14px, min(4.2vw, 5.5vh), 40px); line-height: 1.5; text-align: center;
       margin: 0 20px; letter-spacing: 1px;
     }
     #intro .pct { margin-top: 26px; font-size: 12px; color: #2f4a5c; }
     #intro .skip { position: absolute; bottom: 34px; font-size: 10px; color: #8a8f94; animation: blink 1s steps(1) infinite; }
     @keyframes blink { 50% { opacity: 0; } }
+    @media (max-height: 500px) {
+      #intro canvas { margin-bottom: 8px; }
+      #intro .pct { margin-top: 8px; }
+      #intro .skip { display: none; }
+      #intro .c1, #intro .c2 { top: 14px; }
+      #intro .c3, #intro .c4 { bottom: 14px; }
+      #intro .ibar { top: 20px; }
+    }
+    /* While the intro plays, hide the page so nothing shows under the phone browser bar */
+    html.intro-on, html.intro-on body { background: #f4f1ea; }
+    html.intro-on body > *:not(#intro) { visibility: hidden; }
   </style>
+  <script>
+    try { if (sessionStorage.getItem('introSeen') !== '1') document.documentElement.classList.add('intro-on'); }
+    catch (e) { document.documentElement.classList.add('intro-on'); }
+  </script>
 </head>
 <body id="top">
 
@@ -379,7 +394,7 @@
       if (!intro) return;
       var seen = false;
       try { seen = sessionStorage.getItem('introSeen') === '1'; } catch (e) {}
-      if (seen) { intro.remove(); return; }
+      if (seen) { intro.remove(); document.documentElement.classList.remove('intro-on'); return; }
       document.documentElement.style.overflow = 'hidden';
 
       var map = [
@@ -438,7 +453,7 @@
         R: '#6fa89a', r: '#4e8577', F: '#f6c454', f: '#e8743b', T: '#a9844a', S: '#c9c3b8'
       };
       var cv = document.getElementById('introTower');
-      var scale = Math.max(3, Math.min(6, Math.floor(Math.min(window.innerWidth * 0.4 / 32, (window.innerHeight - 380) / 49))));
+      var scale = Math.max(2, Math.min(6, Math.floor(Math.min(window.innerWidth * 0.4 / 32, (window.innerHeight - (window.innerHeight < 500 ? 190 : 380)) / 49))));
       cv.style.width = (32 * scale) + 'px';
       cv.style.height = (49 * scale) + 'px';
       var ctx = cv.getContext('2d');
@@ -467,6 +482,7 @@
         clearInterval(timer);
         try { sessionStorage.setItem('introSeen', '1'); } catch (e) {}
         intro.classList.add('done');
+        document.documentElement.classList.remove('intro-on');
         document.documentElement.style.overflow = '';
         setTimeout(function () { intro.remove(); }, 600);
       }
