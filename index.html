@@ -126,7 +126,11 @@
     .card:hover { transform: translateY(-3px); box-shadow: 0 18px 44px rgba(0, 0, 0, 0.11); }
     .card:target { border-color: var(--accent); }
     .card h3 { font-size: 18px; color: var(--ink); margin-bottom: 4px; }
-    .card .meta { color: var(--muted); font-size: 14px; margin-bottom: 10px; }
+    .card .meta { color: var(--muted); font-size: 14px; margin-bottom: 6px; }
+    .card .status { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: #2f6b3a; margin-bottom: 10px; }
+    .card .status .dot { width: 7px; height: 7px; border-radius: 50%; background: #3f9a52; }
+    .card .status.upcoming { color: #9a6a12; }
+    .card .status.upcoming .dot { background: #d79a2b; }
     .card a { font-size: 14px; font-weight: 500; margin-right: 14px; }
     .card h3 a.title-link { font-size: inherit; font-weight: inherit; margin-right: 0; color: inherit; text-decoration: none; }
     .card h3 a.title-link .arrow { display: inline-block; transition: transform 0.25s ease; }
@@ -135,6 +139,42 @@
     .card.card-link { position: relative; cursor: pointer; }
     .card.card-link .title-link::after { content: ""; position: absolute; inset: 0; border-radius: 10px; }
     .card.card-link p a { position: relative; z-index: 1; }
+
+    /* Creative work carousel */
+    .work-intro { margin-top: 40px; margin-bottom: 0; }
+    .work-carousel { position: relative; height: 320px; overflow: hidden; touch-action: pan-y; }
+    .work-slide {
+      position: absolute; top: 28px; left: 50%; width: 200px; margin-left: -100px;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+    .work-slide .w-img {
+      width: 200px; height: 200px; border-radius: 10px; overflow: hidden; position: relative;
+      background: var(--soft); border: 1px solid var(--line); box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    }
+    .work-slide .w-img img, .work-slide .w-img video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .work-slide .w-ph {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      color: rgba(17,17,17,0.35); font-size: 12px; text-align: center; padding: 14px;
+      background: radial-gradient(circle at 30% 25%, #fbf8f2 0, #ece4d4 100%);
+    }
+    .work-slide .w-ph.w-soon { font-family: "DM Serif Display", serif; font-size: 20px; color: rgba(17,17,17,0.45); }
+    .w-cap { text-align: center; margin-top: 10px; transition: opacity 0.3s ease; }
+    .w-title { font-weight: 600; font-size: 15px; color: var(--ink); }
+    .w-desc { font-size: 13px; color: var(--muted); line-height: 1.45; margin-top: 2px; }
+    .work-slide:not(.on) .w-cap { opacity: 0; }
+    .work-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 6px; }
+    .work-nav button.arrow {
+      width: 36px; height: 36px; border-radius: 50%; border: none; cursor: pointer;
+      background: var(--ink); color: #fff; font-size: 16px; line-height: 1;
+      transition: background 0.2s ease;
+    }
+    .work-nav button.arrow:hover { background: #444; }
+    .work-dots { display: flex; gap: 8px; align-items: center; }
+    .work-dots button {
+      width: 7px; height: 7px; border-radius: 4px; border: none; padding: 0; cursor: pointer;
+      background: #c8c2b6; transition: width 0.3s ease, background 0.3s ease;
+    }
+    .work-dots button.on { width: 24px; background: var(--ink); }
 
     /* Timeline */
     .item {
@@ -357,26 +397,37 @@
         <div class="card card-link" id="proj-dashboard">
           <h3><a class="title-link" href="nyc-dashboard.html">NYC Property Market Dashboard <span class="arrow">&rarr;</span></a></h3>
           <div class="meta">Python · Plotly Dash · Render</div>
+          <div class="status"><span class="dot"></span>Project completed</div>
           <p>A full-stack dashboard analyzing 498K NYC property transactions from 2013 to 2025. Built end to end in Python, with KD-Tree spatial joins and the master dataset compressed from 109MB to about 10MB for deployment.</p>
           <p><a href="nyc-dashboard.html">Read the write-up</a><a href="https://nyc-property-dashboard-xi9u.onrender.com/">Live dashboard</a><a href="https://github.com/xixi0817/nyc_property_dashboard">Code</a></p>
         </div>
 
         <div class="card" id="proj-condo">
           <h3>NYC Condominium Valuation</h3>
-          <div class="meta">R · Linear Regression · Random Forest · Team project</div>
+          <div class="meta">R · Linear Regression · Random Forest</div>
+          <div class="status"><span class="dot"></span>Project completed</div>
           <p>Predicted NYC condo values using linear regression and random forest models.</p>
         </div>
 
         <div class="card" id="proj-walmart">
           <h3>Walmart Retail Sales Analysis</h3>
           <div class="meta">R · Regression Modeling</div>
+          <div class="status"><span class="dot"></span>Project completed</div>
           <p>Compared three regression models for weekly sales using AIC and confidence intervals.</p>
         </div>
 
         <div class="card" id="proj-dental">
           <h3>BrightSmile Dental Database</h3>
           <div class="meta">SQL · Microsoft Access</div>
+          <div class="status"><span class="dot"></span>Project completed</div>
           <p>A clinic database for managing patient and staff records.</p>
+        </div>
+
+        <div class="card" id="proj-upcoming">
+          <h3>NYC Construction Permits vs. 311 Complaints</h3>
+          <div class="meta">GCP · BigQuery · Cloud Functions · SQL · Python</div>
+          <div class="status upcoming"><span class="dot"></span>Upcoming project</div>
+          <p>A data warehouse linking 271K DOB building permits with 252K construction and plumbing 311 complaints (2020 to 2026), to see which boroughs and permit types draw the most complaints and where unpermitted work may be happening.</p>
         </div>
       </div>
     </section>
@@ -435,6 +486,29 @@
           <figure><img src="images/cat2.jpg" alt="Nono lying by a lamp" loading="lazy"></figure>
           <figure><img src="images/cat3.jpg" alt="Nono climbing into a backpack" loading="lazy"></figure>
           <figure><img src="images/cat4.jpg" alt="Nono yawning next to a lamp" loading="lazy"></figure>
+        </div>
+        <p class="life-intro work-intro">Side Projects: Website designs, illustrations, and videos from before and outside of data.</p>
+        <div class="work-carousel" id="work-carousel">
+            <div class="work-slide">
+              <div class="w-img"><div class="w-ph w-soon">Coming soon</div></div>
+            </div>
+            <div class="work-slide">
+              <div class="w-img"><div class="w-ph w-soon">Coming soon</div></div>
+            </div>
+            <div class="work-slide">
+              <div class="w-img"><div class="w-ph w-soon">Coming soon</div></div>
+            </div>
+            <div class="work-slide">
+              <div class="w-img"><div class="w-ph w-soon">Coming soon</div></div>
+            </div>
+            <div class="work-slide">
+              <div class="w-img"><div class="w-ph w-soon">Coming soon</div></div>
+            </div>
+        </div>
+        <div class="work-nav">
+          <button class="arrow" id="work-prev" aria-label="Previous">&#8249;</button>
+          <div class="work-dots" id="work-dots"></div>
+          <button class="arrow" id="work-next" aria-label="Next">&#8250;</button>
         </div>
       </div>
     </section>
@@ -581,6 +655,52 @@
       }
       intro.addEventListener('click', finish);
       document.addEventListener('keydown', finish, { once: true });
+    })();
+  </script>
+  <script>
+    (function () {
+      var box = document.getElementById('work-carousel');
+      if (!box) return;
+      var slides = box.querySelectorAll('.work-slide');
+      var dotsBox = document.getElementById('work-dots');
+      var n = slides.length, cur = 0;
+      for (var k = 0; k < n; k++) {
+        var d = document.createElement('button');
+        d.setAttribute('aria-label', 'Go to item ' + (k + 1));
+        d.addEventListener('click', (function (i) { return function () { go(i); }; })(k));
+        dotsBox.appendChild(d);
+      }
+      var dots = dotsBox.querySelectorAll('button');
+      function render() {
+        var mobile = window.innerWidth <= 640;
+        var step = mobile ? 150 : 215;
+        slides.forEach(function (sl, i) {
+          var off = i - cur;
+          if (off > n / 2) off -= n;
+          if (off < -n / 2) off += n;
+          var a = Math.abs(off);
+          var sc = a === 0 ? 1.12 : (a === 1 ? 0.88 : 0.72);
+          sl.style.transform = 'translateX(' + (off * step) + 'px) scale(' + sc + ')';
+          sl.style.opacity = a > 2 ? 0 : (a === 0 ? 1 : (a === 1 ? 0.6 : 0.3));
+          sl.style.zIndex = 10 - a;
+          sl.classList.toggle('on', a === 0);
+          sl.setAttribute('aria-hidden', a ? 'true' : 'false');
+        });
+        dots.forEach(function (d, i) { d.classList.toggle('on', i === cur); });
+      }
+      function go(i) { cur = (i + n) % n; render(); }
+      slides.forEach(function (sl, i) { sl.addEventListener('click', function () { if (i !== cur) go(i); }); });
+      document.getElementById('work-prev').addEventListener('click', function () { go(cur - 1); });
+      document.getElementById('work-next').addEventListener('click', function () { go(cur + 1); });
+      var x0 = null;
+      box.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+      box.addEventListener('touchend', function (e) {
+        if (x0 === null) return;
+        var dx = e.changedTouches[0].clientX - x0; x0 = null;
+        if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1));
+      });
+      window.addEventListener('resize', render);
+      render();
     })();
   </script>
 </body>
