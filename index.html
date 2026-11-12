@@ -81,7 +81,7 @@
       background: rgba(0, 0, 0, 0.35);
     }
     .tag {
-      color: #f3d7a4; text-shadow: 0 1px 3px rgba(0,0,0,0.7), 0 0 12px rgba(0,0,0,0.5); letter-spacing: 3px; font-size: 13px;
+      color: #f2b84b; text-shadow: 0 1px 3px rgba(0,0,0,0.7), 0 0 12px rgba(0,0,0,0.5); letter-spacing: 3px; font-size: 13px;
       font-weight: 600; text-transform: uppercase;
     }
     header h1 {
@@ -128,6 +128,13 @@
     .card h3 { font-size: 18px; color: var(--ink); margin-bottom: 4px; }
     .card .meta { color: var(--muted); font-size: 14px; margin-bottom: 10px; }
     .card a { font-size: 14px; font-weight: 500; margin-right: 14px; }
+    .card h3 a.title-link { font-size: inherit; font-weight: inherit; margin-right: 0; color: inherit; text-decoration: none; }
+    .card h3 a.title-link .arrow { display: inline-block; transition: transform 0.25s ease; }
+    .card h3 a.title-link:hover .arrow,
+    .card.card-link:hover .title-link .arrow { transform: translateX(4px); }
+    .card.card-link { position: relative; cursor: pointer; }
+    .card.card-link .title-link::after { content: ""; position: absolute; inset: 0; border-radius: 10px; }
+    .card.card-link p a { position: relative; z-index: 1; }
 
     /* Timeline */
     .item {
@@ -165,6 +172,8 @@
     footer strong { color: var(--ink); font-family: "DM Serif Display", serif; font-size: 17px; }
 
     /* Menu button (phones only) */
+    .menu-btn:focus { outline: none; }
+    .menu-btn:focus-visible { outline: 2px solid rgba(255, 255, 255, 0.8); outline-offset: 2px; border-radius: 4px; }
     .menu-btn {
       display: none; background: none; border: 0; cursor: pointer;
       width: 36px; height: 36px; margin-right: -9px; padding: 11px 9px;
@@ -295,7 +304,7 @@
         <li><a href="#about">About</a></li>
         <li class="has-sub"><a href="#projects">Projects</a>
           <ul class="sub">
-            <li><a href="#proj-dashboard">NYC Property Market Dashboard</a></li>
+            <li><a href="nyc-dashboard.html">NYC Property Market Dashboard</a></li>
             <li><a href="#proj-condo">NYC Condominium Valuation</a></li>
             <li><a href="#proj-walmart">Walmart Retail Sales Analysis</a></li>
             <li><a href="#proj-dental">BrightSmile Dental Database</a></li>
@@ -303,7 +312,6 @@
         </li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#education">Education</a></li>
-        <li><a href="#resume">Resume</a></li>
         <li><a href="#life">Beyond Data</a></li>
       </ul>
     </div>
@@ -341,11 +349,11 @@
       <div class="wrap">
         <h2>Projects</h2>
 
-        <div class="card" id="proj-dashboard">
-          <h3>NYC Property Market Dashboard</h3>
+        <div class="card card-link" id="proj-dashboard">
+          <h3><a class="title-link" href="nyc-dashboard.html">NYC Property Market Dashboard <span class="arrow">&rarr;</span></a></h3>
           <div class="meta">Python · Plotly Dash · Render</div>
           <p>A full-stack dashboard analyzing 498K NYC property transactions from 2013 to 2025. Built end to end in Python, with KD-Tree spatial joins and the master dataset compressed from 109MB to about 10MB for deployment.</p>
-          <p><a href="https://nyc-property-dashboard-xi9u.onrender.com/">Live dashboard</a><a href="https://github.com/xixi0817/nyc_property_dashboard">Code</a></p>
+          <p><a href="nyc-dashboard.html">Read the write-up</a><a href="https://nyc-property-dashboard-xi9u.onrender.com/">Live dashboard</a><a href="https://github.com/xixi0817/nyc_property_dashboard">Code</a></p>
         </div>
 
         <div class="card" id="proj-condo">

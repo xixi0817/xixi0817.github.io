@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NYC Property Market Dashboard | Xixi (Cecilia) Lin</title>
+  <meta name="description" content="How neighborhood factors relate to NYC residential sale prices, 2013 to 2025. A Plotly Dash project by Xixi (Cecilia) Lin.">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text: #1a1a1a;
+      --ink: #111111;
+      --muted: #6b6b6b;
+      --line: #e6e1d6;
+      --bg: #ffffff;
+      --soft: #f4f1ea;
+      --accent: #c9a46a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+    body { font-family: "DM Sans", sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; font-size: 16px; }
+    a { color: var(--ink); }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+    .wide { max-width: 960px; }
+
+    nav { position: sticky; top: 0; z-index: 10; background: var(--soft); box-shadow: 0 1px 0 rgba(0,0,0,0.08); }
+    nav .wrap { max-width: 860px; display: flex; justify-content: space-between; align-items: center; height: 60px; }
+    nav .name { font-family: "DM Serif Display", serif; color: var(--ink); text-decoration: none; font-size: 18px; }
+    nav .back { color: var(--ink); text-decoration: none; font-size: 15px; }
+    nav .back:hover { color: #555; }
+
+    .intro { padding: 64px 0 40px; border-bottom: 1px solid var(--line); }
+    .kicker { color: #9a7a3f; letter-spacing: 3px; font-size: 12px; font-weight: 600; text-transform: uppercase; }
+    h1 { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 42px; line-height: 1.15; color: var(--ink); margin: 12px 0 14px; }
+    .lead { font-size: 19px; color: #333; }
+    .meta { margin-top: 18px; color: var(--muted); font-size: 14px; }
+    .actions { margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 9px 18px; border-radius: 6px; text-decoration: none; font-size: 15px; font-weight: 500; border: 1px solid var(--ink); color: var(--ink); transition: background 0.2s ease, color 0.2s ease; }
+    .btn.solid, .btn:hover { background: var(--ink); color: #fff; }
+    .actions:hover .btn.solid:not(:hover) { background: transparent; color: var(--ink); }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 36px; }
+    .stat { background: var(--soft); border-radius: 10px; padding: 16px 18px; }
+    .stat b { display: block; font-family: "DM Serif Display", serif; font-weight: 400; font-size: 28px; color: var(--ink); line-height: 1.2; }
+    .stat span { font-size: 13px; color: var(--muted); }
+
+    section { padding: 48px 0; border-bottom: 1px solid var(--line); }
+    h2 { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 28px; color: var(--ink); margin-bottom: 18px; }
+    h3 { font-size: 17px; color: var(--ink); margin: 26px 0 8px; }
+    p + p { margin-top: 14px; }
+    ul { padding-left: 20px; margin-top: 10px; }
+    li + li { margin-top: 8px; }
+    .num { font-weight: 600; color: var(--ink); }
+
+    figure { margin: 28px 0 8px; }
+    figure img { width: 100%; display: block; border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 36px rgba(0,0,0,0.07); }
+    .fig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .fig-grid figure { margin-bottom: 0; }
+    .includes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 28px; padding-left: 0; list-style: none; }
+    .includes li { margin: 0; padding-left: 14px; border-left: 2px solid var(--line); }
+    .includes b { display: block; color: var(--ink); font-weight: 600; }
+    figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; }
+
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 15px; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); }
+    th { font-size: 13px; color: var(--muted); font-weight: 500; }
+    td.r { text-align: right; font-variant-numeric: tabular-nums; }
+    th.r { text-align: right; }
+
+    .note { background: var(--soft); border-left: 3px solid var(--accent); padding: 14px 18px; margin-top: 18px; font-size: 15px; }
+    .todo { background: #fff6e0; border: 1px dashed #d9b36b; padding: 14px 18px; border-radius: 8px; font-size: 15px; }
+
+    footer { background: var(--soft); color: var(--muted); padding: 40px 0 60px; font-size: 14px; }
+    footer .wrap { max-width: 860px; }
+    footer strong { color: var(--ink); font-family: "DM Serif Display", serif; font-size: 17px; font-weight: 400; }
+
+    @media (max-width: 743px) {
+      h1 { font-size: 32px; }
+      .lead { font-size: 17px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .fig-grid, .includes { grid-template-columns: 1fr; }
+      nav .name { font-size: 16px; }
+      table { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="wrap">
+      <a class="name" href="index.html">Xixi (Cecilia) Lin</a>
+      <a class="back" href="index.html#projects">&larr; All projects</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="intro">
+      <div class="wrap">
+        <div class="kicker">Project · Data Visualization</div>
+        <h1>NYC Property Market Dashboard</h1>
+        <p class="lead">How do neighborhood factors relate to residential sale prices across New York City from 2013 to 2025?</p>
+        <p class="meta">Python · Pandas · Plotly Dash · Render &nbsp;|&nbsp; Team project, Baruch College CIS 9655, Spring 2026</p>
+        <div class="actions">
+          <a class="btn solid" href="https://nyc-property-dashboard-xi9u.onrender.com/">Open the live dashboard</a>
+          <a class="btn" href="https://github.com/xixi0817/nyc_property_dashboard">View the code</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>498K</b><span>property sales</span></div>
+          <div class="stat"><b>185</b><span>ZIP codes</span></div>
+          <div class="stat"><b>13</b><span>years, 2013 to 2025</span></div>
+          <div class="stat"><b>4</b><span>neighborhood factors</span></div>
+        </div>
+      </div>
+      <div class="wrap wide">
+        <figure>
+          <img src="images/overview.jpg" alt="Top of the NYC Property Market Dashboard with KPI cards, filters, and a ZIP code price map">
+          <figcaption>The top of the dashboard: summary cards, the year and borough filters, and the price map.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <section id="question">
+      <div class="wrap">
+        <h2>The question</h2>
+        <p>Property prices in New York change a lot from one neighborhood to the next. We wanted to see which neighborhood factors move together with sale prices, and how prices changed in each borough over thirteen years.</p>
+        <p>We looked at four factors: median household income, school quality, crime, and distance to the nearest subway station. The dashboard lets users filter by year range, borough, property type, and crime type, and every chart updates together.</p>
+      </div>
+    </section>
+
+    <section id="includes">
+      <div class="wrap">
+        <h2>What the dashboard includes</h2>
+        <ul class="includes">
+          <li><b>Summary cards</b>Total transactions, median price, price change over the selected years, and the most expensive borough.</li>
+          <li><b>ZIP code price map</b>Hover any ZIP to see its median price, school score, nearest subway station, and arrests.</li>
+          <li><b>Price trends by borough</b>A line chart that can switch between Condo, 1-Family, 2-Family, 3-Family, Rental, and Co-op.</li>
+          <li><b>Four factor charts</b>Income, school quality, crime, and subway distance, each plotted against median price by ZIP code.</li>
+          <li><b>Crime type selector</b>Eight crime measures, with the correlation shown in the chart title.</li>
+          <li><b>Monthly patterns</b>Seasonal sales and prices, with summary cards and controls that can follow the main filters or be set separately.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="data">
+      <div class="wrap">
+        <h2>Data</h2>
+        <table>
+          <thead><tr><th>Dataset</th><th>What it covers</th><th>Source</th><th class="r">Size</th></tr></thead>
+          <tbody>
+            <tr><td>Property sales</td><td>Borough, ZIP code, year, month, sale price, property type</td><td>NYC Department of Finance</td><td class="r">498,000 sales</td></tr>
+            <tr><td>Household income</td><td>Median household income by ZIP code</td><td>Online open data sources</td><td class="r">56 ZIPs</td></tr>
+            <tr><td>Schools</td><td>School rankings with ZIP code and level</td><td>Compiled by the team from public school rankings</td><td class="r">178 schools</td></tr>
+            <tr><td>Crime</td><td>Arrests by ZIP code and offense type, 2025</td><td>NYPD Arrest Data (NYC Open Data), NYPD CompStat</td><td class="r">192 ZIPs</td></tr>
+            <tr><td>Subway</td><td>Station locations</td><td>MTA</td><td class="r">496 stations</td></tr>
+          </tbody>
+        </table>
+        <h3>Cleaning</h3>
+        <ul>
+          <li>Standardized all ZIP codes to five digits so the datasets could join.</li>
+          <li>Removed sales under $10,000, which are usually transfers between family members or other non-market deals.</li>
+          <li>Kept only ZIP codes with at least 10 sales, so a few unusual sales could not drive a ZIP's median.</li>
+          <li>Turned school rankings into a score (101 minus the average rank in the ZIP), so a higher number means better schools.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="build">
+      <div class="wrap">
+        <h2>How it was built</h2>
+        <ul>
+          <li><span class="num">Spatial join:</span> matched each ZIP code's center point to its nearest subway station with a KD-Tree, then stored the distance in miles.</li>
+          <li><span class="num">Deployment:</span> compressed the master sales file from 109MB to about 10MB so the app could run on Render's free tier.</li>
+          <li><span class="num">Map color scale:</span> fixed the price range from $300K to $1.8M, so moving the year slider shows real price growth instead of rescaling the colors each time.</li>
+          <li><span class="num">Linked filters:</span> one year slider and borough filter drive the map, trend line, and all four factor charts. The monthly section can follow them or be set on its own.</li>
+          <li><span class="num">Speed:</span> added server-side caching so repeated filter combinations load faster.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="findings">
+      <div class="wrap">
+        <h2>What we found</h2>
+
+        <h3>Prices rose 80% in twelve years, but not evenly</h3>
+        <p>The citywide median sale price went from <span class="num">$540,000</span> in 2013 to <span class="num">$970,000</span> in 2025. Brooklyn grew the fastest and doubled. Manhattan is still the most expensive borough, but it grew the least and has been close to flat since 2016.</p>
+        <table>
+          <thead><tr><th>Borough</th><th class="r">2013 median</th><th class="r">2025 median</th><th class="r">Change</th></tr></thead>
+          <tbody>
+            <tr><td>Brooklyn</td><td class="r">$581,250</td><td class="r">$1,165,000</td><td class="r">+100%</td></tr>
+            <tr><td>Bronx</td><td class="r">$364,250</td><td class="r">$700,000</td><td class="r">+92%</td></tr>
+            <tr><td>Staten Island</td><td class="r">$385,000</td><td class="r">$710,000</td><td class="r">+84%</td></tr>
+            <tr><td>Queens</td><td class="r">$480,000</td><td class="r">$839,000</td><td class="r">+75%</td></tr>
+            <tr><td>Manhattan</td><td class="r">$1,270,000</td><td class="r">$1,725,000</td><td class="r">+36%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="wrap wide">
+        <figure>
+          <img src="images/line.jpg" alt="Line chart of median sale price by borough from 2013 to 2025" loading="lazy">
+          <figcaption>Median sale price by borough. The shaded band marks 2020 to 2021.</figcaption>
+        </figure>
+      </div>
+
+      <div class="wrap">
+        <h3>Income matters most, crime barely shows up</h3>
+        <p>At the ZIP code level, household income had the strongest link with sale prices. Total arrests had almost no relationship at all.</p>
+        <table>
+          <thead><tr><th>Factor</th><th class="r">Correlation with median price (r)</th></tr></thead>
+          <tbody>
+            <tr><td>Median household income</td><td class="r">+0.50</td></tr>
+            <tr><td>School quality score</td><td class="r">+0.39</td></tr>
+            <tr><td>Distance to nearest subway</td><td class="r">&minus;0.27</td></tr>
+            <tr><td>Total arrests</td><td class="r">&minus;0.07</td></tr>
+          </tbody>
+        </table>
+        <p class="note">Crimes per 10,000 people showed a positive correlation (+0.25), which looks backwards. It mostly comes from Manhattan, where prices are high and many arrests happen in areas with few residents, so the per-person rate is inflated. This is a reminder that a correlation on its own can mislead.</p>
+      </div>
+      <div class="wrap wide">
+        <figure>
+          <img src="images/income.jpg" alt="Scatter plot of median household income against median sale price by ZIP code" loading="lazy">
+          <figcaption>Household income vs. median sale price. Each bubble is a ZIP code, sized by number of sales.</figcaption>
+        </figure>
+        <div class="fig-grid">
+          <figure>
+            <img src="images/school.jpg" alt="Scatter plot of school quality score against median sale price by ZIP code" loading="lazy">
+            <figcaption>School quality vs. median sale price.</figcaption>
+          </figure>
+          <figure>
+            <img src="images/subway.jpg" alt="Scatter plot of distance to the nearest subway station against median sale price by ZIP code" loading="lazy">
+            <figcaption>Distance to the nearest subway vs. median sale price.</figcaption>
+          </figure>
+        </div>
+        <figure>
+          <img src="images/crime.jpg" alt="Scatter plot of total arrests against median sale price by ZIP code" loading="lazy">
+          <figcaption>Total arrests vs. median sale price. The trend line is nearly flat.</figcaption>
+        </figure>
+      </div>
+
+      <div class="wrap">
+        <h3>Summer is the busiest season</h3>
+        <p>June had the most sales, and the citywide median price was also highest in June, at about $779,000. February was the slowest month. Sales volume also swung by year: it dropped to about 29,000 in 2020, then jumped to a peak of about 62,000 in 2022.</p>
+      </div>
+      <div class="wrap wide">
+        <figure>
+          <img src="images/seasonal.jpg" alt="Monthly chart of number of transactions and median sale price" loading="lazy">
+          <figcaption>Transactions and median sale price by month, all years combined.</figcaption>
+        </figure>
+        <figure>
+          <img src="images/kpi-monthly.jpg" alt="Monthly summary cards: lowest median price in February, highest volume in June" loading="lazy">
+          <figcaption>The monthly summary cards: prices are about 8% higher in June than in February, and sales volume is 29% lower in February.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="limits">
+      <div class="wrap">
+        <h2>Limitations</h2>
+        <ul>
+          <li>These are correlations. They show which factors move together with price, not what causes it.</li>
+          <li>Grouping by ZIP code hides differences inside each ZIP, which can be large in New York.</li>
+          <li>Income data covers 56 ZIP codes, so that chart has fewer points than the others.</li>
+          <li>Arrest data is from 2025 only, while sale prices cover 2013 to 2025.</li>
+        </ul>
+        <h3>Next steps</h3>
+        <ul>
+          <li>A regression model that controls for borough, to separate each factor's effect from the Manhattan effect.</li>
+          <li>Matching each factor to the same year as the sales.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="role">
+      <div class="wrap">
+        <h2>My role</h2>
+        <p>This was a four-person team project. Jiahuan Wu and I built the dashboard together, and Victor Louie and Chhin Lama prepared the final presentation and speech script.</p>
+        <ul>
+          <li><span class="num">Data sources:</span> Jiahuan led the data research and found most of the data sources.</li>
+          <li><span class="num">Data cleaning and joins:</span> Jiahuan and I cleaned the datasets and joined the property sales data with the four neighborhood datasets: income, schools, crime, and subway.</li>
+          <li><span class="num">Dashboard structure:</span> I designed and built the overall structure of the dashboard, including the layout, the sections, and how the filters connect the charts.</li>
+          <li><span class="num">Subway join:</span> I built the KD-Tree spatial join that matches each ZIP code to its nearest subway station.</li>
+          <li><span class="num">Deployment:</span> I compressed the master sales file and deployed the app to Render.</li>
+          <li><span class="num">Chart choices:</span> Jiahuan reviewed the details with me, such as whether a bubble chart or a line chart fit each dataset better.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <strong>Xixi (Cecilia) Lin</strong> &nbsp;© 2026
+    </div>
+  </footer>
+
+</body>
+</html>
