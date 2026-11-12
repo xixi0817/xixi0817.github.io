@@ -144,9 +144,14 @@
     .item .when { color: var(--muted); font-size: 14px; padding-top: 2px; }
     .item h3 { font-size: 17px; }
     .item .where { color: var(--muted); font-size: 15px; }
+    .item .where a { color: inherit; text-underline-offset: 3px; }
+    .item .where a:hover { color: var(--ink); }
+    .item ul.duties { margin: 10px 0 0; padding-left: 18px; font-size: 15px; line-height: 1.6; }
+    .item ul.duties li { margin-bottom: 4px; }
     h2.sub { font-size: 20px; margin: 36px 0 8px; }
 
     /* Life */
+    .life-intro { max-width: 680px; margin-bottom: 24px; }
     .life-grid {
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
     }
@@ -380,8 +385,15 @@
       <div class="wrap">
         <h2>Experience</h2>
         <div class="item">
-          <div class="when">7 years</div>
-          <div><h3>Broadcasting Technician</h3><div class="where">Sinovision</div></div>
+          <div class="when">Aug 2017 – Aug 2024</div>
+          <div><h3>Broadcasting Technician</h3><div class="where"><a href="https://www.sinovision.net/home/" target="_blank" rel="noopener">Sinovision, Inc.</a> | Queens, NY</div>
+            <ul class="duties">
+              <li>Built and ran daily broadcast playlists in Crispin automation software, scheduling programs, commercials, and station IDs to the frame across multiple channels.</li>
+              <li>Ran live event broadcasts on LiveStream equipment, including Chinese New Year celebrations, keeping on-air timing exact under deadline pressure.</li>
+              <li>Maintained broadcast equipment and systems, troubleshooting signal and playout issues during live operations.</li>
+              <li>Monitored on-air signals and escalated problems to the IT team and WNBC.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -390,7 +402,7 @@
       <div class="wrap">
         <h2>Education</h2>
         <div class="item">
-          <div class="when">2027 – (expected)</div>
+          <div class="when">Starting Spring 2027</div>
           <div><h3>M.S. in Computer Science (Online)</h3><div class="where">Georgia Institute of Technology</div></div>
         </div>
         <div class="item">
@@ -399,7 +411,7 @@
         </div>
         <div class="item">
           <div class="when">May 2025</div>
-          <div><h3>B.A. in Digital Design</h3><div class="where">City College of New York</div></div>
+          <div><h3>B.A. in Art, Digital Design and Illustration concentration</h3><div class="where">City College of New York</div></div>
         </div>
       </div>
     </section>
@@ -416,11 +428,12 @@
     <section id="life">
       <div class="wrap">
         <h2>Beyond Data</h2>
+        <p class="life-intro">Nono is a distinguished lady, born on April 13, 2023. She joined our family when she was just two months old. Today she is a healthy, wealthy lady who eats chicken breast, lickable cat treats, and unlimited dry and wet food every day.</p>
         <div class="life-grid">
-          <figure><img src="images/life1.jpg" alt="" onerror="this.remove()"><figcaption>Caption 1</figcaption></figure>
-          <figure><img src="images/life2.jpg" alt="" onerror="this.remove()"><figcaption>Caption 2</figcaption></figure>
-          <figure><img src="images/life3.jpg" alt="" onerror="this.remove()"><figcaption>Caption 3</figcaption></figure>
-          <figure><img src="images/life4.jpg" alt="" onerror="this.remove()"><figcaption>Caption 4</figcaption></figure>
+          <figure><img src="images/cat1.jpg" alt="My cat Nono peeking out of a storage bin" loading="lazy"></figure>
+          <figure><img src="images/cat2.jpg" alt="Nono lying by a lamp" loading="lazy"></figure>
+          <figure><img src="images/cat3.jpg" alt="Nono climbing into a backpack" loading="lazy"></figure>
+          <figure><img src="images/cat4.jpg" alt="Nono yawning next to a lamp" loading="lazy"></figure>
         </div>
       </div>
     </section>
