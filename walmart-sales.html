@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Walmart Retail Sales Analysis | Xixi (Cecilia) Lin</title>
+  <meta name="description" content="Which economic and seasonal factors relate to weekly sales at 45 Walmart stores, 2010 to 2012. An R project by Xixi (Cecilia) Lin.">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text: #1a1a1a;
+      --ink: #111111;
+      --muted: #6b6b6b;
+      --line: #e6e1d6;
+      --bg: #ffffff;
+      --soft: #f4f1ea;
+      --accent: #c9a46a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+    body { font-family: "DM Sans", sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; font-size: 16px; }
+    a { color: var(--ink); }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+    .wide { max-width: 960px; }
+
+    nav { position: sticky; top: 0; z-index: 10; background: var(--soft); box-shadow: 0 1px 0 rgba(0,0,0,0.08); }
+    nav .wrap { max-width: 860px; display: flex; justify-content: space-between; align-items: center; height: 60px; }
+    nav .name { font-family: "DM Serif Display", serif; color: var(--ink); text-decoration: none; font-size: 18px; }
+    nav .back { color: var(--ink); text-decoration: none; font-size: 15px; }
+    nav .back:hover { color: #555; }
+
+    .intro { padding: 64px 0 40px; border-bottom: 1px solid var(--line); }
+    .kicker { color: #9a7a3f; letter-spacing: 3px; font-size: 12px; font-weight: 600; text-transform: uppercase; }
+    h1 { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 42px; line-height: 1.15; color: var(--ink); margin: 12px 0 14px; }
+    .lead { font-size: 19px; color: #333; }
+    .meta { margin-top: 18px; color: var(--muted); font-size: 14px; }
+    .actions { margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 9px 18px; border-radius: 6px; text-decoration: none; font-size: 15px; font-weight: 500; border: 1px solid var(--ink); color: var(--ink); transition: background 0.2s ease, color 0.2s ease; }
+    .btn.solid, .btn:hover { background: var(--ink); color: #fff; }
+    .actions:hover .btn.solid:not(:hover) { background: transparent; color: var(--ink); }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 36px; }
+    .stat { background: var(--soft); border-radius: 10px; padding: 16px 18px; }
+    .stat b { display: block; font-family: "DM Serif Display", serif; font-weight: 400; font-size: 28px; color: var(--ink); line-height: 1.2; }
+    .stat span { font-size: 13px; color: var(--muted); }
+
+    section { padding: 48px 0; border-bottom: 1px solid var(--line); }
+    h2 { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 28px; color: var(--ink); margin-bottom: 18px; }
+    h3 { font-size: 17px; color: var(--ink); margin: 26px 0 8px; }
+    p + p { margin-top: 14px; }
+    ul { padding-left: 20px; margin-top: 10px; }
+    li + li { margin-top: 8px; }
+    .num { font-weight: 600; color: var(--ink); }
+
+    figure { margin: 28px 0 8px; }
+    figure img { width: 100%; display: block; border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 36px rgba(0,0,0,0.07); }
+    .fig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .fig-grid figure { margin-bottom: 0; }
+    .includes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 28px; padding-left: 0; list-style: none; }
+    .includes li { margin: 0; padding-left: 14px; border-left: 2px solid var(--line); }
+    .includes b { display: block; color: var(--ink); font-weight: 600; }
+    figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; }
+
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 15px; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); }
+    th { font-size: 13px; color: var(--muted); font-weight: 500; }
+    td.r { text-align: right; font-variant-numeric: tabular-nums; }
+    th.r { text-align: right; }
+
+    table + p { margin-top: 16px; }
+    .note { background: var(--soft); border-left: 3px solid var(--accent); padding: 14px 18px; margin-top: 18px; font-size: 15px; }
+    .todo { background: #fff6e0; border: 1px dashed #d9b36b; padding: 14px 18px; border-radius: 8px; font-size: 15px; }
+
+    footer { background: var(--soft); color: var(--muted); padding: 40px 0 60px; font-size: 14px; }
+    footer .wrap { max-width: 860px; }
+    footer strong { color: var(--ink); font-family: "DM Serif Display", serif; font-size: 17px; font-weight: 400; }
+
+    @media (max-width: 743px) {
+      h1 { font-size: 32px; }
+      .lead { font-size: 17px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .fig-grid, .includes { grid-template-columns: 1fr; }
+      nav .name { font-size: 16px; }
+      table { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="wrap">
+      <a class="name" href="index.html">Xixi (Cecilia) Lin</a>
+      <a class="back" href="index.html#projects">&larr; All projects</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="intro">
+      <div class="wrap">
+        <div class="kicker">Project · Statistical Modeling</div>
+        <h1>Walmart Retail Sales Analysis</h1>
+        <p class="lead">Which economic and seasonal factors relate to weekly sales at 45 Walmart stores from 2010 to 2012?</p>
+        <p class="meta">R · ggplot2 · glmnet · forecast &nbsp;|&nbsp; Individual project, Baruch College STA 9750, Spring 2026</p>
+        <div class="actions">
+          <a class="btn solid" href="https://github.com/xixi0817/walmart_sales_analysis">View the code</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>6,434</b><span>weekly store records</span></div>
+          <div class="stat"><b>45</b><span>stores</span></div>
+          <div class="stat"><b>143</b><span>weeks, Feb 2010 to Oct 2012</span></div>
+          <div class="stat"><b>5</b><span>candidate predictors</span></div>
+        </div>
+      </div>
+    </div>
+
+    <section id="question">
+      <div class="wrap">
+        <h2>The question</h2>
+        <p>Retail sales move with the economy and the calendar. I wanted to test which of five outside factors had a measurable relationship with a store's weekly sales: temperature, fuel price, the Consumer Price Index (CPI), the unemployment rate, and whether the week included a holiday.</p>
+        <p>The work had four parts: association tests for each factor, three linear regression models compared side by side, Lasso and Ridge regression as a check on the full model, and an ARIMA model to forecast the next 12 weeks.</p>
+      </div>
+    </section>
+
+    <section id="data">
+      <div class="wrap">
+        <h2>Data</h2>
+        <p>The Walmart Store Sales dataset from <a href="https://www.kaggle.com/datasets/yasserh/walmart-dataset">Kaggle</a> has one row per store per week.</p>
+        <table>
+          <thead><tr><th>Variable</th><th>What it measures</th></tr></thead>
+          <tbody>
+            <tr><td>Weekly_Sales</td><td>Store revenue for the week in USD (the response variable)</td></tr>
+            <tr><td>Holiday_Flag</td><td>1 if the week includes a holiday (Super Bowl, Labor Day, Thanksgiving, or Christmas), otherwise 0</td></tr>
+            <tr><td>Temperature</td><td>Average temperature in the store's region, &deg;F</td></tr>
+            <tr><td>Fuel_Price</td><td>Fuel price in the region, USD per gallon</td></tr>
+            <tr><td>CPI</td><td>Consumer Price Index in the region</td></tr>
+            <tr><td>Unemployment</td><td>Unemployment rate in the region, %</td></tr>
+          </tbody>
+        </table>
+        <h3>Cleaning</h3>
+        <ul>
+          <li>Checked all columns for missing values. There were none.</li>
+          <li>Removed one row with a temperature of &minus;2.06&deg;F, which left 6,434 rows.</li>
+          <li>Converted Store and Holiday_Flag to factors, since they are labels and not quantities.</li>
+          <li>Weekly sales are right-skewed. The median store week is about $961K, and the top weeks reach $3.8M.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="association">
+      <div class="wrap">
+        <h2>Association tests</h2>
+        <p>I tested each factor against weekly sales on its own, with correlation tests for the numeric factors and an ANOVA for the holiday flag. Four of the five were statistically significant, but every correlation was small.</p>
+        <table>
+          <thead><tr><th>Factor</th><th class="r">Correlation (r)</th><th class="r">p-value</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr><td>Unemployment</td><td class="r">&minus;0.106</td><td class="r">&lt; 0.001</td><td>Significant, strongest</td></tr>
+            <tr><td>CPI</td><td class="r">&minus;0.073</td><td class="r">&lt; 0.001</td><td>Significant, weak</td></tr>
+            <tr><td>Temperature</td><td class="r">&minus;0.064</td><td class="r">&lt; 0.001</td><td>Significant, weak</td></tr>
+            <tr><td>Fuel price</td><td class="r">0.009</td><td class="r">0.45</td><td>Not significant</td></tr>
+            <tr><td>Holiday week</td><td class="r">F = 8.75</td><td class="r">0.003</td><td>Significant</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="wrap wide">
+        <figure>
+          <img src="images/walmart-unemployment.jpg" alt="Scatter plot of unemployment rate against weekly sales with a downward regression line" loading="lazy">
+          <figcaption>Unemployment rate vs. weekly sales. Each point is one store week.</figcaption>
+        </figure>
+        <figure>
+            <img src="images/walmart-holiday.jpg" alt="Box plot of weekly sales for non-holiday and holiday weeks" loading="lazy">
+            <figcaption>Holiday weeks have a higher median: about $1.02M vs. $956K.</figcaption>
+          </figure>
+          <figure>
+            <img src="images/walmart-cpi.jpg" alt="Scatter plot of CPI against weekly sales showing three separate clusters" loading="lazy">
+            <figcaption>CPI falls into three clusters, which reflect different regional markets.</figcaption>
+          </figure>
+      </div>
+    </section>
+
+    <section id="models">
+      <div class="wrap">
+        <h2>Regression models</h2>
+        <p>I built three linear regression models and compared them on R&sup2;, RMSE, and AIC.</p>
+        <table>
+          <thead><tr><th>Model</th><th>Predictors</th><th class="r">R&sup2;</th><th class="r">RMSE</th><th class="r">AIC</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Unemployment</td><td class="r">1.13%</td><td class="r">$561,147</td><td class="r">188,608</td></tr>
+            <tr><td>2</td><td>All five factors</td><td class="r">2.54%</td><td class="r">$557,110</td><td class="r">188,523</td></tr>
+            <tr><td>3</td><td>CPI, Unemployment, Holiday</td><td class="r">2.48%</td><td class="r">$557,302</td><td class="r">188,524</td></tr>
+          </tbody>
+        </table>
+        <p>In Model 2, temperature (p = 0.065) and fuel price (p = 0.52) were not significant. Dropping them gave Model 3, which has almost the same R&sup2;, RMSE, and AIC with two fewer predictors, so I chose Model 3 as the final model.</p>
+
+        <h3>Model 3 coefficients</h3>
+        <table>
+          <thead><tr><th>Term</th><th class="r">Estimate</th><th class="r">95% CI</th><th class="r">p-value</th></tr></thead>
+          <tbody>
+            <tr><td>Intercept</td><td class="r">$1,664,629</td><td class="r">$1,564,206 to $1,765,053</td><td class="r">&lt; 0.001</td></tr>
+            <tr><td>CPI (per point)</td><td class="r">&minus;$1,652</td><td class="r">&minus;$2,015 to &minus;$1,288</td><td class="r">&lt; 0.001</td></tr>
+            <tr><td>Unemployment (per 1%)</td><td class="r">&minus;$42,520</td><td class="r">&minus;$50,139 to &minus;$34,900</td><td class="r">&lt; 0.001</td></tr>
+            <tr><td>Holiday week</td><td class="r">+$84,439</td><td class="r">$31,017 to $137,861</td><td class="r">0.002</td></tr>
+          </tbody>
+        </table>
+        <p>Holding the other factors constant, a one-point rise in unemployment goes with about $42.5K less in weekly sales per store, and a holiday week goes with about $84.4K more.</p>
+
+        <h3>Lasso and Ridge</h3>
+        <p>I fit Lasso and Ridge regression on all five factors with <code>cv.glmnet</code>, using cross-validation to choose lambda. Both landed at R&sup2; = 2.54% and RMSE of about $557,110, the same as Model 2. Regularization did not change the result, which suggests the predictors are not strongly correlated with each other.</p>
+
+        <h3>Holiday weeks and above-median sales</h3>
+        <p>I also split weekly sales at the median into High and Low. In holiday weeks, 54.9% of store weeks were above the median, compared with 49.6% in other weeks. A chi-square test found this difference significant (X&sup2; = 4.42, p = 0.036).</p>
+      </div>
+    </section>
+
+    <section id="forecast">
+      <div class="wrap">
+        <h2>Forecasting the next 12 weeks</h2>
+        <p>For the time series, I averaged weekly sales across all 45 stores, which gave 143 weeks. Average sales sit near $1.0M most of the year and jump in late November and December. The two highest weeks were the weeks before Christmas in 2010 ($1.80M) and 2011 ($1.71M).</p>
+      </div>
+      <div class="wrap wide">
+        <figure>
+          <img src="images/walmart-trend.jpg" alt="Line chart of average weekly sales from 2010 to 2012 with a smoothed trend line" loading="lazy">
+          <figcaption>Average weekly sales across all stores, with a LOESS trend line.</figcaption>
+        </figure>
+      </div>
+      <div class="wrap">
+        <p><code>auto.arima</code> selected ARIMA(1,1,1)(0,1,0)[52], a model with a 52-week seasonal difference. On the training data it had an RMSE of $32,249 and a mean absolute percentage error of 1.7%.</p>
+        <p>The 12-week forecast from November 2012 to January 2013 repeats the holiday pattern of the two earlier years: a Thanksgiving week near $1.50M, a pre-Christmas week near $1.73M, and then a return to about $950K in January.</p>
+      </div>
+      <div class="wrap wide">
+        <figure>
+          <img src="images/walmart-forecast.jpg" alt="ARIMA forecast of average weekly sales for the next 12 weeks with 80% and 95% intervals" loading="lazy">
+          <figcaption>ARIMA forecast for the next 12 weeks, with 80% and 95% intervals. Revised November 2026: the month labels on the x-axis were corrected.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="limits">
+      <div class="wrap">
+        <h2>What the results mean</h2>
+        <ul>
+          <li>Unemployment had the largest effect of the five factors, and holiday weeks had a clear positive effect.</li>
+          <li>Fuel price and temperature did not add anything once the other factors were in the model.</li>
+          <li>The best model explains only about 2.5% of the variation in weekly sales. The outside factors in this dataset are real but small. Most of the variation comes from things the models did not include, such as store size, location, and promotions.</li>
+        </ul>
+        <h3>Limitations</h3>
+        <ul>
+          <li>These are associations, not causes.</li>
+          <li>The models used regional factors only and did not include Store as a predictor, so large and small stores were treated the same.</li>
+          <li>The ARIMA model was fit to the average of all stores, so it does not forecast any single store.</li>
+        </ul>
+        <h3>Follow-up check (added November 2026)</h3>
+        <p>Adding Store as a factor to Model 3 raises R&sup2; from 2.5% to about 92%. This was not part of the original analysis, but it shows that which store a row comes from explains far more of weekly sales than the economic factors do.</p>
+        <p>The chart below shows why. Average weekly sales range from about $260K at Store 33 to about $2.11M at Store 20, roughly eight times as much. Differences between stores this large are much bigger than the effect of CPI, unemployment, or holidays.</p>
+      </div>
+      <div class="wrap wide">
+        <figure>
+          <img src="images/walmart-stores.jpg" alt="Bar chart of average weekly sales for each of the 45 stores, sorted from lowest to highest, with the overall average marked" loading="lazy">
+          <figcaption>Average weekly sales by store, sorted from lowest to highest. The red line is the average across all stores. Added November 2026.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="role">
+      <div class="wrap">
+        <h2>My role</h2>
+        <p>This was an individual project. I did all of the work: choosing the dataset, cleaning the data, the association tests, the regression models, Lasso and Ridge, the ARIMA forecast, the written report, and the presentation.</p>
+        <p class="note">Updated November 2026, after the course: the R script now defines <code>forecast_result</code>, which was missing from the original submission, and places the forecast chart's month labels on the correct dates. The follow-up check with Store was also added. The model results did not change.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <strong>Xixi (Cecilia) Lin</strong> &nbsp;© 2026
+    </div>
+  </footer>
+
+</body>
+</html>
