@@ -162,6 +162,8 @@
     .w-title { font-weight: 600; font-size: 15px; color: var(--ink); }
     .w-desc { font-size: 13px; color: var(--muted); line-height: 1.45; margin-top: 2px; }
     .work-slide:not(.on) .w-cap { opacity: 0; }
+    .w-link { display: block; color: inherit; text-decoration: none; margin: 0; font-weight: inherit; }
+    .work-slide.on .w-img { cursor: pointer; }
     .work-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 6px; }
     .work-nav button.arrow {
       width: 36px; height: 36px; border-radius: 50%; border: none; cursor: pointer;
@@ -401,7 +403,7 @@
         <h2>About</h2>
         <p>I am a Master's student in Business Analytics (Data Analytics concentration) at Baruch College, graduating in May 2027. In Spring 2027 I will also start the Online Master of Science in Computer Science at Georgia Tech.</p>
         <p>Before moving into data, I studied Digital Design at City College of New York and worked for seven years as a Broadcasting Technician at Sinovision. I started building websites during my design work, and that led me to coding and data analytics.</p>
-        <p>I am looking for Summer 2027 data analyst and business analyst roles in New York.</p>
+        <p>I am looking for Summer 2027 internships and new grad data analyst and business analyst roles in New York.</p>
         <div class="skills">
           <span>Python</span><span>SQL</span><span>R</span>
           <span>Pandas</span><span>Plotly Dash</span><span>ggplot2</span>
@@ -678,8 +680,8 @@
         segs[k].classList.add('on');
         k++;
         pct.textContent = Math.round(k / n * 100) + '%';
-        if (k >= n) { clearInterval(timer); setTimeout(finish, 1000); }
-      }, reduce ? 20 : 156);
+        if (k >= n) { clearInterval(timer); setTimeout(finish, 500); }
+      }, reduce ? 20 : 125);
 
       function finish() {
         if (intro.classList.contains('done')) return;
@@ -726,7 +728,7 @@
         dots.forEach(function (d, i) { d.classList.toggle('on', i === cur); });
       }
       function go(i) { cur = (i + n) % n; render(); }
-      slides.forEach(function (sl, i) { sl.addEventListener('click', function () { if (i !== cur) go(i); }); });
+      slides.forEach(function (sl, i) { sl.addEventListener('click', function (e) { if (i !== cur) { e.preventDefault(); go(i); } }); });
       document.getElementById('work-prev').addEventListener('click', function () { go(cur - 1); });
       document.getElementById('work-next').addEventListener('click', function () { go(cur + 1); });
       var x0 = null;
