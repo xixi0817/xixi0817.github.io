@@ -192,15 +192,35 @@
 
     /* Life */
     .life-intro { max-width: 680px; margin-bottom: 24px; }
-    .life-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    .life-viewport { overflow: hidden; touch-action: pan-y; }
+    .life-row { position: relative; }
+    .life-arrow {
+      position: absolute; top: 50%; z-index: 2; transform: translateY(-50%);
+      width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line);
+      background: rgba(255,255,255,0.92); color: var(--ink); font-size: 24px; line-height: 1;
+      cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.12);
     }
+    .life-arrow:hover { background: #fff; }
+    .life-arrow.prev { left: -19px; }
+    .life-arrow.next { right: -19px; }
+    .life-arrow[hidden] { display: none; }
+    @media (max-width: 743px) { .life-arrow.prev { left: 6px; } .life-arrow.next { right: 6px; } }
+    .life-grid {
+      --h: 250px;
+      display: flex; gap: 12px;
+      transition: transform 0.45s ease;
+    }
+    /* Each frame keeps its photo's own shape, so the whole photo is visible */
     .life-grid figure {
-      position: relative; margin: 0; aspect-ratio: 1 / 1;
+      flex: 0 0 auto; height: var(--h);
+      position: relative; margin: 0;
       border-radius: 10px; overflow: hidden;
       background: var(--soft); border: 1px solid var(--line);
     }
-    .life-grid img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .life-grid img { height: 100%; width: auto; display: block; }
+    .life-grid figure.edge { cursor: pointer; }
+    .life-grid figure.edge img { transition: opacity 0.2s ease; }
+    .life-grid figure.edge:hover img { opacity: 0.8; }
     .life-grid figcaption {
       position: absolute; left: 0; right: 0; bottom: 0;
       padding: 28px 12px 10px; font-size: 13px; color: #fff;
@@ -268,7 +288,7 @@
       header h1 { font-size: 34px; }
       .tag { font-size: 11.5px; letter-spacing: 1.6px; }
       .item { grid-template-columns: 1fr; gap: 2px; }
-      .life-grid { grid-template-columns: repeat(2, 1fr); }
+      .life-grid { --h: 190px; }
     }
     /* Nav after scrolling past the photo: cream, dark text */
     nav.scrolled { background: #f4f1ea; box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08); }
@@ -351,8 +371,8 @@
           <ul class="sub">
             <li><a href="nyc-dashboard.html">NYC Property Market Dashboard</a></li>
             <li><a href="walmart-sales.html">Walmart Retail Sales Analysis</a></li>
-            <li><a href="#proj-condo">NYC Condominium Valuation</a></li>
-            <li><a href="#proj-dental">BrightSmile Dental Database</a></li>
+            <li><a href="condo-valuation.html">NYC Condominium Valuation</a></li>
+            <li><a href="dental-database.html">BrightSmile Dental Database</a></li>
           </ul>
         </li>
         <li><a href="#experience">Experience</a></li>
@@ -410,18 +430,20 @@
           <p><a href="walmart-sales.html">Read the write-up</a><a href="https://github.com/xixi0817/walmart_sales_analysis">Code</a></p>
         </div>
 
-        <div class="card" id="proj-condo">
-          <h3>NYC Condominium Valuation</h3>
-          <div class="meta">R · Linear Regression · Random Forest</div>
+        <div class="card card-link" id="proj-condo">
+          <h3><a class="title-link" href="condo-valuation.html">NYC Condominium Valuation <span class="arrow">&rarr;</span></a></h3>
+          <div class="meta">Python · Linear Regression · Random Forest</div>
           <div class="status"><span class="dot"></span>Project completed</div>
           <p>Predicted NYC condo values using linear regression and random forest models.</p>
+          <p><a href="condo-valuation.html">Read the write-up</a></p>
         </div>
 
-        <div class="card" id="proj-dental">
-          <h3>BrightSmile Dental Database</h3>
+        <div class="card card-link" id="proj-dental">
+          <h3><a class="title-link" href="dental-database.html">BrightSmile Dental Database <span class="arrow">&rarr;</span></a></h3>
           <div class="meta">SQL · Microsoft Access</div>
           <div class="status"><span class="dot"></span>Project completed</div>
           <p>A clinic database for managing patient and staff records.</p>
+          <p><a href="dental-database.html">Read the write-up</a><a href="https://www.youtube.com/watch?v=54yVU4n7h6s">Watch the demo</a></p>
         </div>
 
         <div class="card" id="proj-upcoming">
@@ -482,11 +504,23 @@
       <div class="wrap">
         <h2>Beyond Data</h2>
         <p class="life-intro">Nono is a distinguished lady, born on April 13, 2023. She joined our family when she was just two months old. Today she is a healthy, wealthy lady who eats chicken breast, lickable cat treats, and unlimited dry and wet food every day.</p>
-        <div class="life-grid">
-          <figure><img src="images/cat1.jpg" alt="My cat Nono peeking out of a storage bin" loading="lazy"></figure>
-          <figure><img src="images/cat2.jpg" alt="Nono lying by a lamp" loading="lazy"></figure>
-          <figure><img src="images/cat3.jpg" alt="Nono climbing into a backpack" loading="lazy"></figure>
-          <figure><img src="images/cat4.jpg" alt="Nono yawning next to a lamp" loading="lazy"></figure>
+        <div class="life-row">
+        <button class="life-arrow prev" id="life-prev" aria-label="Previous photo">&#8249;</button>
+        <button class="life-arrow next" id="life-next" aria-label="Next photo">&#8250;</button>
+        <div class="life-viewport">
+          <div class="life-grid" id="life-grid">
+            <figure><img src="images/cat1.jpg" alt="My cat Nono"></figure>
+            <figure><img src="images/cat2.jpg" alt="My cat Nono"></figure>
+            <figure><img src="images/cat3.jpg" alt="My cat Nono"></figure>
+            <figure><img src="images/cat4.jpg" alt="My cat Nono"></figure>
+            <figure><img src="images/cat5.jpg" alt="My cat Nono"></figure>
+            <figure><img src="images/cat6.jpg" alt="My cat Nono"></figure>
+            <figure><img src="images/cat7.jpg" alt="My cat Nono"></figure>
+            <figure><img src="images/cat8.jpg" alt="My cat Nono"></figure>
+            <figure><img src="images/cat9.jpg" alt="My cat Nono"></figure>
+            <figure><img src="images/cat10.jpg" alt="My cat Nono"></figure>
+          </div>
+        </div>
         </div>
         <p class="life-intro work-intro">Side Projects: Website designs, illustrations, and videos from before and outside of data.</p>
         <div class="work-carousel" id="work-carousel">
@@ -699,6 +733,78 @@
         if (x0 === null) return;
         var dx = e.changedTouches[0].clientX - x0; x0 = null;
         if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1));
+      });
+      window.addEventListener('resize', render);
+      render();
+    })();
+  </script>
+  <script>
+    /* Nono photo row: frames keep each photo's shape. Use the arrows, click the
+       leftmost or rightmost photo, or swipe to slide by one photo. Wraps around.
+       Missing photos are skipped. */
+    (function () {
+      var track = document.getElementById('life-grid');
+      if (!track) return;
+      var view = track.parentNode;
+      var row = view.parentNode;
+      var index = 0;
+      function figs() { return Array.prototype.slice.call(track.querySelectorAll('figure')); }
+      function overflow() { return Math.max(0, track.scrollWidth - view.clientWidth); }
+      function maxIndex() {
+        var list = figs(), o = overflow();
+        if (o <= 1) return 0;
+        for (var i = 0; i < list.length; i++) if (list[i].offsetLeft >= o - 1) return i;
+        return list.length - 1;
+      }
+      function render() {
+        var list = figs(), m = maxIndex();
+        if (index > m) index = m;
+        var x = list.length ? Math.min(list[index].offsetLeft, overflow()) : 0;
+        track.style.transform = 'translateX(' + (-x) + 'px)';
+        var right = x + view.clientWidth, lastVisible = 0;
+        list.forEach(function (f, i) { if (f.offsetLeft < right - 20) lastVisible = i; });
+        list.forEach(function (f, i) {
+          var isLeft = m > 0 && i === index;
+          var isRight = m > 0 && i === lastVisible && !isLeft;
+          f.classList.toggle('edge', isLeft || isRight);
+          f.dataset.dir = isLeft ? '-1' : (isRight ? '1' : '0');
+        });
+        var arrows = row.querySelectorAll('.life-arrow');
+        for (var a = 0; a < arrows.length; a++) arrows[a].hidden = m === 0;
+      }
+      function go(d) {
+        var m = maxIndex();
+        if (!m) return;
+        index += d;
+        if (index > m) index = 0;
+        if (index < 0) index = m;
+        render();
+      }
+      var prev = document.getElementById('life-prev'), nextBtn = document.getElementById('life-next');
+      if (prev) prev.addEventListener('click', function () { go(-1); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { go(1); });
+      /* If catN.jpg is missing, also try .JPG, .jpeg, .JPEG, .png, .PNG, .webp */
+      var exts = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG', 'webp'];
+      figs().forEach(function (f) {
+        var img = f.querySelector('img');
+        var base = img.getAttribute('src').replace(/\.[^.\/]+$/, '');
+        var tries = 0;
+        function next() {
+          tries += 1;
+          if (tries >= exts.length) { f.remove(); render(); return; }
+          img.src = base + '.' + exts[tries];
+        }
+        img.addEventListener('error', next);
+        img.addEventListener('load', render);
+        if (img.complete && img.naturalWidth === 0) next();
+        f.addEventListener('click', function () { var d = +f.dataset.dir; if (d) go(d); });
+      });
+      var startX = null;
+      track.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend', function (e) {
+        if (startX === null) return;
+        var dx = e.changedTouches[0].clientX - startX; startX = null;
+        if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
       });
       window.addEventListener('resize', render);
       render();
