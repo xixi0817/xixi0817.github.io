@@ -681,7 +681,7 @@
         k++;
         pct.textContent = Math.round(k / n * 100) + '%';
         if (k >= n) { clearInterval(timer); setTimeout(finish, 500); }
-      }, reduce ? 20 : 125);
+      }, reduce ? 20 : 63);
 
       function finish() {
         if (intro.classList.contains('done')) return;
