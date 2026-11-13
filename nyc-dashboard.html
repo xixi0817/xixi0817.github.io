@@ -157,8 +157,11 @@
         </table>
         <h3>Cleaning</h3>
         <ul>
-          <li>Standardized all ZIP codes to five digits so the datasets could join.</li>
-          <li>Removed sales under $10,000, which are usually transfers between family members or other non-market deals.</li>
+          <li>Combined 65 yearly borough sales files from the NYC Department of Finance (2013 to 2025, about 1.1 million rows) with a second sales dataset.</li>
+          <li>Removed sales under $10,000, which are usually transfers between family members or other non-market deals, and sales over $500 million.</li>
+          <li>Removed non-residential sales, whole-building sales with more than 10 units, and hotel and commercial condo sales.</li>
+          <li>Removed duplicate records, which left about 498,000 residential sales.</li>
+          <li>Standardized all ZIP codes to five digits, then joined the sales with ZIP-level household income, school rankings, NYPD arrest and CompStat crime data, and MTA subway stations.</li>
           <li>Kept only ZIP codes with at least 10 sales, so a few unusual sales could not drive a ZIP's median.</li>
           <li>Turned school rankings into a score (101 minus the average rank in the ZIP), so a higher number means better schools.</li>
         </ul>
@@ -169,10 +172,10 @@
       <div class="wrap">
         <h2>How it was built</h2>
         <ul>
-          <li><span class="num">Spatial join:</span> matched each ZIP code's center point to its nearest subway station with a KD-Tree, then stored the distance in miles.</li>
-          <li><span class="num">Deployment:</span> compressed the master sales file from 109MB to about 10MB so the app could run on Render's free tier.</li>
+          <li><span class="num">Spatial join:</span> matched each ZIP code's center point to its nearest subway station with a KD-Tree (SciPy cKDTree), then stored the distance in miles. The same method assigned 279,000 arrest records to their nearest ZIP code.</li>
+          <li><span class="num">Deployment:</span> reduced the master sales file to about 2 MB by keeping only the columns the app uses, so the app could run on Render's free tier.</li>
           <li><span class="num">Map color scale:</span> fixed the price range from $300K to $1.8M, so moving the year slider shows real price growth instead of rescaling the colors each time.</li>
-          <li><span class="num">Linked filters:</span> one year slider and borough filter drive the map, trend line, and all four factor charts. The monthly section can follow them or be set on its own.</li>
+          <li><span class="num">Linked filters:</span> the year slider and borough filter link 7 charts, including the map, the trend line, and the four factor charts. The monthly section can follow them or be set on its own.</li>
           <li><span class="num">Speed:</span> added server-side caching so repeated filter combinations load faster.</li>
         </ul>
       </div>
@@ -275,12 +278,10 @@
         <h2>My role</h2>
         <p>This was a four-person team project. Jiahuan Wu and I built the dashboard together, and Victor Louie and Chhin Lama prepared the final presentation and speech script.</p>
         <ul>
-          <li><span class="num">Data sources:</span> Jiahuan led the data research and found most of the data sources.</li>
-          <li><span class="num">Data cleaning and joins:</span> Jiahuan and I cleaned the datasets and joined the property sales data with the four neighborhood datasets: income, schools, crime, and subway.</li>
-          <li><span class="num">Dashboard structure:</span> I designed and built the overall structure of the dashboard, including the layout, the sections, and how the filters connect the charts.</li>
-          <li><span class="num">Subway join:</span> I built the KD-Tree spatial join that matches each ZIP code to its nearest subway station.</li>
-          <li><span class="num">Deployment:</span> I compressed the master sales file and deployed the app to Render.</li>
-          <li><span class="num">Chart choices:</span> Jiahuan reviewed the details with me, such as whether a bubble chart or a line chart fit each dataset better.</li>
+          <li><span class="num">Data preparation:</span> created, cleaned, and joined the datasets. This was the largest part of the work.</li>
+          <li><span class="num">Spatial joins:</span> ran the KD-Tree joins that matched each ZIP code to its nearest subway station and each arrest record to its nearest ZIP code.</li>
+          <li><span class="num">Dashboard:</span> built the layout, the sections, and the filters that link the charts.</li>
+          <li><span class="num">Deployment:</span> reduced the data file and deployed the app on Render.</li>
         </ul>
       </div>
     </section>
