@@ -83,6 +83,10 @@
       nav .name { font-size: 16px; }
       table { font-size: 14px; }
     }
+    .keyf { margin-top: 28px; background: var(--soft); border-left: 3px solid var(--accent); border-radius: 8px; padding: 16px 22px; }
+    .keyf .keyf-label { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8a6a35; margin-bottom: 8px; }
+    .keyf ul { margin: 0; padding-left: 18px; }
+    .keyf li { font-size: 15px; line-height: 1.6; margin: 4px 0; }
   </style>
 </head>
 <body>
@@ -101,6 +105,14 @@
         <h1>NYC Condominium Valuation</h1>
         <p class="lead">Which building characteristics relate most to the assessed market value of New York City properties?</p>
         <p class="meta">Python · pandas · scikit-learn · statsmodels &nbsp;|&nbsp; Team project, Baruch College CIS 9660, Spring 2026</p>
+        <div class="keyf">
+          <div class="keyf-label">Key findings</div>
+          <ul>
+            <li>Estimated gross income was the strongest predictor in both the linear regression and the random forest.</li>
+            <li>On the test set, the tuned random forest reached R&sup2; = 0.986, compared with 0.960 for linear regression.</li>
+            <li>These scores are too optimistic: two predictors together reproduce the target, and the same buildings appear in both the training and test sets.</li>
+          </ul>
+        </div>
         <div class="stats">
           <div class="stat"><b>62,847</b><span>comparable property records</span></div>
           <div class="stat"><b>9,279</b><span>unique buildings</span></div>

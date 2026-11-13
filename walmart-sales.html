@@ -83,6 +83,10 @@
       nav .name { font-size: 16px; }
       table { font-size: 14px; }
     }
+    .keyf { margin-top: 28px; background: var(--soft); border-left: 3px solid var(--accent); border-radius: 8px; padding: 16px 22px; }
+    .keyf .keyf-label { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8a6a35; margin-bottom: 8px; }
+    .keyf ul { margin: 0; padding-left: 18px; }
+    .keyf li { font-size: 15px; line-height: 1.6; margin: 4px 0; }
   </style>
 </head>
 <body>
@@ -103,6 +107,14 @@
         <p class="meta">R · ggplot2 · glmnet · forecast &nbsp;|&nbsp; Individual project, Baruch College STA 9750, Spring 2026</p>
         <div class="actions">
           <a class="btn solid" href="https://github.com/xixi0817/walmart_sales_analysis">View the code</a>
+        </div>
+        <div class="keyf">
+          <div class="keyf-label">Key findings</div>
+          <ul>
+            <li>Unemployment had the strongest link with weekly sales: each 1-point rise went with about $42.5K less per store per week. Holiday weeks went with about $84.4K more.</li>
+            <li>The economic factors together explain only about 2.5% of weekly sales. Adding Store to the model raises this to about 92%.</li>
+            <li>The 12-week forecast repeats the holiday peak: about $1.73M in the week before Christmas, then back to about $950K in January.</li>
+          </ul>
         </div>
         <div class="stats">
           <div class="stat"><b>6,434</b><span>weekly store records</span></div>
@@ -257,6 +269,19 @@
           <img src="images/walmart-stores.jpg" alt="Bar chart of average weekly sales for each of the 45 stores, sorted from lowest to highest, with the overall average marked" loading="lazy">
           <figcaption>Average weekly sales by store, sorted from lowest to highest. The red line is the average across all stores. Added November 2026.</figcaption>
         </figure>
+      </div>
+    </section>
+
+    <section id="recs">
+      <div class="wrap">
+        <h2>Recommendations</h2>
+        <ul>
+          <li><span class="num">Store operations teams:</span> plan staffing and inventory around Thanksgiving and the weeks before Christmas. These are the most predictable peaks, with the forecast near $1.50M and $1.73M against about $1.0M in a typical week.</li>
+          <li><span class="num">Regional managers:</span> set sales targets store by store instead of from regional economic data. Store explains far more of weekly sales than the economic factors, and average weekly sales range from about $260K to $2.11M.</li>
+          <li><span class="num">Planning teams:</span> treat rising unemployment as a small signal. One point of unemployment goes with about $42.5K a week, roughly 4% of a typical $961K store week.</li>
+          <li><span class="num">Analytics teams:</span> add store size, location, and promotion data before building further models, since the current factors leave most of the variation unexplained.</li>
+        </ul>
+        <p class="note">These are associations from 2010 to 2012 data, not causal effects.</p>
       </div>
     </section>
 
