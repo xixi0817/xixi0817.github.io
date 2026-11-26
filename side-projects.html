@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Side Projects | Xixi (Cecilia) Lin</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="description" content="Website designs, illustrations, and videos by Xixi (Cecilia) Lin from before and outside of data.">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text: #1a1a1a;
+      --ink: #111111;
+      --muted: #6b6b6b;
+      --line: #e6e1d6;
+      --bg: #ffffff;
+      --soft: #f4f1ea;
+      --accent: #c9a46a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+    body { font-family: "DM Sans", sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; font-size: 16px; }
+    a { color: var(--ink); }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+
+    nav { position: sticky; top: 0; z-index: 10; background: var(--soft); box-shadow: 0 1px 0 rgba(0,0,0,0.08); }
+    nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+    nav .name { font-family: "DM Serif Display", serif; color: var(--ink); text-decoration: none; font-size: 18px; }
+    nav .back { color: var(--ink); text-decoration: none; font-size: 15px; }
+    nav .back:hover { color: #555; }
+
+    .intro { padding: 64px 0 40px; border-bottom: 1px solid var(--line); }
+    .kicker { color: #9a7a3f; letter-spacing: 3px; font-size: 12px; font-weight: 600; text-transform: uppercase; }
+    h1 { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 42px; line-height: 1.15; color: var(--ink); margin: 12px 0 14px; }
+    .lead { font-size: 19px; color: #333; max-width: 680px; }
+    .jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+    .jump a {
+      background: var(--soft); border: 1px solid var(--line); border-radius: 20px;
+      padding: 4px 14px; font-size: 14px; text-decoration: none; color: var(--ink);
+      transition: border-color 0.2s ease;
+    }
+    .jump a:hover { border-color: var(--accent); }
+
+    section { padding: 52px 0; border-bottom: 1px solid var(--line); }
+    h2 { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 30px; color: var(--ink); margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 14px; margin-bottom: 16px; }
+    section p { max-width: 700px; }
+    p + p { margin-top: 14px; }
+    h3 { font-size: 17px; color: var(--ink); margin: 34px 0 4px; }
+    .btn { display: inline-block; margin-top: 18px; padding: 9px 18px; border-radius: 6px; text-decoration: none; font-size: 15px; font-weight: 500; border: 1px solid var(--ink); color: var(--ink); transition: background 0.2s ease, color 0.2s ease; }
+    .btn:hover { background: var(--ink); color: #fff; }
+
+    figure { margin: 24px 0 0; }
+    figure img, figure video {
+      width: 100%; display: block; background: var(--soft);
+      border: 1px solid var(--line); border-radius: 10px;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.07);
+    }
+    figure img { cursor: zoom-in; }
+    figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
+    .g2, .g3 { display: grid; gap: 16px; align-items: start; }
+    .g2 { grid-template-columns: repeat(2, 1fr); }
+    .g3 { grid-template-columns: repeat(3, 1fr); }
+    .g2 figure, .g3 figure { margin-top: 24px; }
+
+    footer { background: var(--soft); color: var(--muted); padding: 40px 0 60px; font-size: 14px; }
+    footer strong { color: var(--ink); font-family: "DM Serif Display", serif; font-size: 17px; font-weight: 400; }
+
+    /* Full-size viewer */
+    .viewer {
+      position: fixed; inset: 0; z-index: 50; display: none;
+      align-items: center; justify-content: center; padding: 24px;
+      background: rgba(17,17,17,0.9); cursor: zoom-out;
+    }
+    .viewer.open { display: flex; }
+    .viewer img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; }
+    .viewer button {
+      position: absolute; top: 14px; right: 16px; width: 40px; height: 40px;
+      border: 0; border-radius: 50%; background: rgba(255,255,255,0.15);
+      color: #fff; font-size: 22px; line-height: 1; cursor: pointer;
+    }
+
+    @media (max-width: 743px) {
+      h1 { font-size: 32px; }
+      h2 { font-size: 26px; }
+      .lead { font-size: 17px; }
+      nav .name { font-size: 16px; }
+      .g3 { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .g2 { gap: 12px; }
+      .g2.stack { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="wrap">
+      <a class="name" href="index.html">Xixi (Cecilia) Lin</a>
+      <a class="back" href="index.html#life">&larr; Back to home</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="intro">
+      <div class="wrap">
+        <div class="kicker">Side Projects</div>
+        <h1>Design and Illustration</h1>
+        <p class="lead">Website designs, illustrations, and videos from before and outside of data. Most of this work is from my B.A. in Digital Design and Illustration at City College of New York.</p>
+        <div class="jump">
+          <a href="#website">Portfolio Website</a>
+          <a href="#prince">The Little Prince</a>
+          <a href="#album">Zhou Shen Album Art</a>
+          <a href="#scooter">The E-Scooters Revolution</a>
+          <a href="#space">Space I Am</a>
+          <a href="#vector">Vector Illustration</a>
+        </div>
+      </div>
+    </div>
+
+    <section id="website">
+      <div class="wrap">
+        <h2>Portfolio Website</h2>
+        <div class="meta">HTML · CSS · JavaScript · Bootstrap &nbsp;|&nbsp; Web Design II, City College of New York</div>
+        <p>A portfolio site for my illustration work, built for Web Design II. I hand-coded every page in HTML, CSS, and JavaScript, using Bootstrap for the side menu. The site has an illustrated home page and one page for each project. The projects below were first shown on this site.</p>
+        <a class="btn" href="/art_portfolio/pra.html">Visit the original site</a>
+        <figure><img src="images/side/web-home.jpg" alt="Home page of the portfolio website with an illustrated portrait" loading="lazy"><figcaption>Home page illustration</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="prince">
+      <div class="wrap">
+        <h2>The Little Prince</h2>
+        <div class="meta">Procreate · Adobe Illustrator</div>
+        <p>Six digital illustrations of the characters the little prince meets on the asteroids. Each one was sketched in Procreate and finished in Adobe Illustrator. The style was influenced by the children's book illustrator Júlia Sardà.</p>
+        <div class="g3">
+          <figure><img src="images/side/prince-k.jpg" alt="The King standing next to a red throne" loading="lazy"><figcaption>The King, Asteroid B-325</figcaption></figure>
+          <figure><img src="images/side/prince-f.jpg" alt="The Vain Man in a pink top hat" loading="lazy"><figcaption>The Vain Man, Asteroid B-326</figcaption></figure>
+          <figure><img src="images/side/prince-d.jpg" alt="The Drunkard sitting among bottles and crates" loading="lazy"><figcaption>The Drunkard, Asteroid B-327</figcaption></figure>
+          <figure><img src="images/side/prince-b.jpg" alt="The Businessman at a desk covered in papers" loading="lazy"><figcaption>The Businessman, Asteroid B-328</figcaption></figure>
+          <figure><img src="images/side/prince-l.jpg" alt="The Lamplighter under a street lamp" loading="lazy"><figcaption>The Lamplighter, Asteroid B-329</figcaption></figure>
+          <figure><img src="images/side/prince-a.jpg" alt="The Geographer at a desk with a globe" loading="lazy"><figcaption>The Geographer, Asteroid B-330</figcaption></figure>
+        </div>
+        <h3>Drawing process</h3>
+        <p>Procreate records the drawing as it happens. These clips are sped up.</p>
+        <div class="g3">
+          <figure><video src="images/side/prince-king.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Drawing process of the King"></video><figcaption>The King</figcaption></figure>
+          <figure><video src="images/side/prince-drunkard.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Drawing process of the Drunkard"></video><figcaption>The Drunkard</figcaption></figure>
+          <figure><video src="images/side/prince-businessman.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Drawing process of the Businessman"></video><figcaption>The Businessman</figcaption></figure>
+        </div>
+        <figure><img src="images/side/prince-collage.jpg" alt="Collage of all six characters" loading="lazy"><figcaption>All six characters together</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="album">
+      <div class="wrap">
+        <h2>Zhou Shen Album Art</h2>
+        <div class="meta">Adobe Illustrator · Photoshop &nbsp;|&nbsp; About 4 weeks</div>
+        <p>Album art for a song by the singer Zhou Shen, in which he voices five characters in a fairy tale: a little girl, the narrator, a young warrior, a dragon, and a king. In the story, a dragon kidnaps the princess and a young warrior sets out to rescue her. The set includes a front and back cover, a poster, and character stickers.</p>
+        <div class="g2">
+          <figure><img src="images/side/album-cover.jpg" alt="Album front cover with Zhou Shen singing" loading="lazy"><figcaption>Front cover</figcaption></figure>
+          <figure><img src="images/side/album-back.jpg" alt="Album back cover with song credits" loading="lazy"><figcaption>Back cover</figcaption></figure>
+          <figure><img src="images/side/album-poster.jpg" alt="Poster of a dragon flying over a dark forest" loading="lazy"><figcaption>Poster</figcaption></figure>
+          <figure><img src="images/side/album-sketch.jpg" alt="Early sketch of the forest scene" loading="lazy"><figcaption>First version of the poster</figcaption></figure>
+          <figure><img src="images/side/album-sticker1.jpg" alt="Sticker of the king character" loading="lazy"><figcaption>Sticker: the king</figcaption></figure>
+          <figure><img src="images/side/album-sticker2.jpg" alt="Sticker of the young warrior character" loading="lazy"><figcaption>Sticker: the young warrior</figcaption></figure>
+        </div>
+        <figure><img src="images/side/album-branding.jpg" alt="Mockup of the cover, poster, and stickers together" loading="lazy"><figcaption>Full set mockup</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="scooter">
+      <div class="wrap">
+        <h2>The E-Scooters Revolution</h2>
+        <div class="meta">Adobe Illustrator · Photoshop &nbsp;|&nbsp; Editorial illustration, about 3 weeks</div>
+        <p>An editorial illustration and two-page magazine layout for a New Yorker article about e-scooter fleets arriving in New York. The idea came from seeing more delivery workers, teenagers, and couples riding e-scooters on the street during the pandemic.</p>
+        <figure><img src="images/side/scooter-final.jpg" alt="Magazine mockup with the cover and the two-page spread" loading="lazy"><figcaption>Final layout</figcaption></figure>
+        <div class="g2 stack">
+          <figure><img src="images/side/scooter-left.jpg" alt="Left page of the article with illustrations" loading="lazy"><figcaption>Left page</figcaption></figure>
+          <figure><img src="images/side/scooter-right.jpg" alt="Right page of the article with illustrations" loading="lazy"><figcaption>Right page</figcaption></figure>
+          <figure><img src="images/side/scooter-view.jpg" alt="Riders on e-scooters in front of the city skyline" loading="lazy"><figcaption>Main illustration</figcaption></figure>
+          <figure><img src="images/side/scooter-people.jpg" alt="A delivery worker on an e-scooter" loading="lazy"><figcaption>Character study</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="space">
+      <div class="wrap">
+        <h2>Space I Am</h2>
+        <div class="meta">Cinema 4D &nbsp;|&nbsp; 3D modeling</div>
+        <p>A 3D model of my ideal work studio, based on my illustration "Space I Am". The project covered modeling, lighting, shading, texturing, camera composition, and rendering.</p>
+        <figure><img src="images/side/space-1.jpg" alt="Render of the work studio with a desk, shelves, and boxes" loading="lazy"><figcaption>Final render</figcaption></figure>
+        <div class="g2">
+          <figure><img src="images/side/space-2.jpg" alt="Studio render from the doorway" loading="lazy"><figcaption>Another camera angle</figcaption></figure>
+          <figure><img src="images/side/space-3.jpg" alt="Studio render showing the easel" loading="lazy"><figcaption>Easel corner</figcaption></figure>
+          <figure><img src="images/side/space-4.jpg" alt="Studio render with purple lighting" loading="lazy"><figcaption>Lighting test</figcaption></figure>
+          <figure><img src="images/side/space-process.jpg" alt="The studio model open in Cinema 4D" loading="lazy"><figcaption>Working in Cinema 4D</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="vector">
+      <div class="wrap">
+        <h2>Vector Illustration</h2>
+        <div class="meta">Adobe Illustrator &nbsp;|&nbsp; Vector Illustration class, Spring 2021</div>
+        <p>Weekly projects from a vector illustration class covering logo design, icons, character design, lettering, 3D illustration, and pattern design. The self-portrait was a line art assignment, where form and depth come from strokes of different weights and angles.</p>
+        <div class="g3">
+          <figure><img src="images/side/vector-self1.jpg" alt="Self-portrait holding a snowboard, full color" loading="lazy"><figcaption>Self-portrait</figcaption></figure>
+          <figure><img src="images/side/vector-self2.jpg" alt="Self-portrait, second version" loading="lazy"><figcaption>Self-portrait, version 2</figcaption></figure>
+          <figure><img src="images/side/vector-self3.jpg" alt="Self-portrait, third version" loading="lazy"><figcaption>Self-portrait, version 3</figcaption></figure>
+        </div>
+        <h3>Weekly projects</h3>
+        <div class="g3">
+          <figure><img src="images/side/vector-week03.jpg" alt="Week 1 monogram designs" loading="lazy"><figcaption>Week 1: Monogram</figcaption></figure>
+          <figure><img src="images/side/vector-week06.jpg" alt="Week 4 lucky cat icon" loading="lazy"><figcaption>Week 4: Lucky cat icon</figcaption></figure>
+          <figure><img src="images/side/vector-week07.jpg" alt="Week 5 three-act story" loading="lazy"><figcaption>Week 5: 3-act story</figcaption></figure>
+          <figure><img src="images/side/vector-week09.jpg" alt="Week 7 seamless pattern" loading="lazy"><figcaption>Week 7: Seamless pattern</figcaption></figure>
+          <figure><img src="images/side/vector-week10.jpg" alt="Week 8 text effect" loading="lazy"><figcaption>Week 8: Text effect</figcaption></figure>
+          <figure><img src="images/side/vector-week11.jpg" alt="Week 9 isometric room titled Space I Am" loading="lazy"><figcaption>Week 9: Space I Am</figcaption></figure>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <strong>Xixi (Cecilia) Lin</strong> &nbsp;© 2026
+    </div>
+  </footer>
+
+  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Full-size image">
+    <button type="button" aria-label="Close">&times;</button>
+    <img alt="">
+  </div>
+
+  <script>
+    /* Click an image to see it full size. Click anywhere or press Esc to close. */
+    (function () {
+      var viewer = document.getElementById('viewer');
+      var big = viewer.querySelector('img');
+      document.querySelectorAll('figure img').forEach(function (img) {
+        img.addEventListener('click', function () {
+          big.src = img.src; big.alt = img.alt;
+          viewer.classList.add('open');
+        });
+      });
+      function close() { viewer.classList.remove('open'); big.removeAttribute('src'); }
+      viewer.addEventListener('click', close);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    })();
+  </script>
+<script data-goatcounter="https://xixilin.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
