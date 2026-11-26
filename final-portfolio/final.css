@@ -1,0 +1,881 @@
+body{
+  background-color: black;
+}
+
+html, body {width: auto!important;} 
+
+/*-* nagvi bar *-------------------------------------------------------------------------------------------*/
+
+.bubbles {
+display: inline-block;
+font-family: 'Freckle Face', cursive;
+position: relative;
+}
+
+.bubbles p {
+position: relative;
+margin: 1em 0 0;
+
+
+z-index: 2;
+font-size: px;
+}
+
+
+
+.individual-bubble {
+position: absolute;
+border-radius: 70%;
+bottom: 20px;
+background-color: yellow;
+z-index: 1;
+}
+
+/* these styles are for the demo, but are not required for the plugin */
+    .zoom {
+      display:inline-block;
+      position: relative;
+    }
+    
+    /* magnifying glass icon */
+    .zoom:after {
+      content:'';
+      display:block; 
+      width:33px; 
+      height:33px; 
+      position:absolute; 
+      top:0;
+      right:0;
+      ;
+    }
+
+    .zoom img {
+      display: block;
+    }
+
+    .zoom img::selection { background-color: transparent; }
+
+    #ex2 img:hover { cursor: url(grab.cur), default; }
+    #ex2 img:active { cursor: url(grabbed.cur), default; }
+
+
+
+    .box
+    {
+    
+      border: 0px solid yellow;
+
+      padding: 20px;
+    }
+    .box:hover
+    {
+      -moz-box-shadow: 0 0 10px pink;
+      -webkit-box-shadow: 0 0 10px red;
+      box-shadow: 0 0 10px white;
+    }
+
+   
+    .box:hover
+    {
+      -moz-box-shadow: 0 0 10px pink;
+      -webkit-box-shadow: 0 0 10px red;
+      box-shadow: 0 0 10px white;
+    }
+
+/*--------------------------------------------------------------------------------------------------------------*/
+body {
+  margin: 0;
+  width:100%; margin:0px 0px 0px 0px; 
+  background-color: none;
+}
+
+a {
+  color: #000;
+}
+
+.header {
+  background: black;
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: fixed;
+  width: 100%;
+  padding: 00px;
+  z-index: 3;
+  font-family: 'Cabin Sketch', cursive;
+  font-size: 25px;
+
+}
+.header a{
+  color: white;
+
+
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+
+  
+}
+
+.header li a {
+  display: block;
+  padding: 5px 15px;
+  border-right: 1px solid #f4f4f4;
+  text-decoration: none;
+  color: white;
+  font-size: 33px;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: white;
+  color:black;
+  
+}
+
+.header .logo {
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 15px 15px 0px;
+  text-decoration: none;
+
+}
+
+/* menu */
+
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+
+}
+
+/* menu icon */
+
+.header .menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 40px 20px;
+  position: relative;
+  user-select: none;
+  border-color: white;
+}
+
+.header .menu-icon .navicon {
+  background: white;
+  display: block;
+  height: 3px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 30px;
+ 
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+  background: white;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+  top: 8px;
+}
+
+.header .menu-icon .navicon:after {
+  top: -8px;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 240px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+
+/* 48em = 768px for nagvi bar */
+
+@media (min-width: 70em) {
+  
+  .header {
+  background-color: black;
+  font-size: 25px;
+  
+ }
+  .header a{
+  background-color: black;
+  color: black;
+ 
+ }
+
+  .header li {
+    float: left;
+    
+  }
+  .header li a {
+    padding: 20px 30px;
+    color: white;
+    font-size: 25px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+  .header .menu-icon {
+    display: none;
+  }
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: white;
+  color: black;
+  
+}
+
+
+.header .logo {
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 15px 15px 0px;
+  text-decoration: none;
+  color: white;
+}
+
+}
+/*---ENDS  navi bar----------------------------------------------------------------------------------------------*/
+
+/* The hero image  size no bigger than 48em*/
+body, html {
+  height: 100%; margin-left: 0%; margin-right: 0%;
+
+}
+.hero-image 
+{
+  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+  background-image: url("images/hero1-1.gif");
+  /* Set a specific height */
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center; 
+  height:100%; 
+  width: 100%;
+  background-color: none;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  top: 50px;
+  bottom: 100px;
+  margin-bottom: 10%;
+
+}
+
+/* Place text in the middle of the image */
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Cabin Sketch', cursive;
+  font-size: 45px;
+  color: white;
+  width: 550px;
+  height: 70px;
+
+}
+/* The hero image  size no bigger than 48em*/
+/*---ENDS  Hero Image and text for mobile end ----------------------------------------------------------------------------------------------*/
+
+/* -------special effects for sub title */
+
+.border{
+  padding: 30px;
+  background: linear-gradient(110deg, #ffeead 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(110deg, #C5E7D7 34%, #88d8b0 34%);
+  background-size: 400% 400%;
+  height: 100px;
+  background-position: 25% 50%;
+  -webkit-animation: Gradient 15s ease infinite;
+  -moz-animation: Gradient 5s ease infinite;
+  margin-top: 20%;
+  background-color: white;
+}
+.inner-cutout{
+  padding: 40px 0;
+  display: block;
+  background-color:#ffffff;/*#ff6f69*/
+  
+  margin: 2%;
+  padding-bottom: 40px;
+  height: 20px;
+  background: radial-gradient(#ff6069, #ff8b87);
+  background-size: 300%;
+  background-position:50% 50%;
+
+}
+
+.knockout {
+  
+  vertical-align: middle;
+  text-align: center;
+  font-family: 'Frijole', cursive;
+  font-size: 57pt;
+  color: black;
+  color: #fff;
+  background: linear-gradient(110deg, #ffffff 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(110deg, yellow 36%, #ffffff 34%);
+  background-size: 400%;
+   -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  margin-bottom: 5px;
+}
+
+.knockout{
+    animation: Gradient 5s ease infinite;
+    -webkit-animation: Gradient 15s ease infinite;
+    -moz-animation: Gradient 5s ease infinite;
+}
+
+@-webkit-keyframes Gradient {
+  0% {
+    background-position: 20% 50%
+  }
+  50% {
+    background-position: 35% 50%
+  }
+  100% {
+    background-position: 40% 50%
+  }
+  
+}
+
+.main{ /*---frame----------*/
+  width: 500px;
+  height: 130px;
+  margin: auto;
+}
+/* -------special effects for sub titleE END ___________________ */
+
+
+/* ALL USED  fonts & size.*/
+.heros {
+  font-family: 'Freckle Face', cursive;
+  font-size: 45px;
+  color:white;
+}
+
+.subtext {
+  font-family: 'Nerko One', cursive;
+  font-size: 65px;
+  color: white;
+}
+
+.text{
+  font-family: 'Pangolin', cursive;
+  font-size: 33px;
+  text-align: justify;
+  color: white;
+}
+
+.title{
+  font-family: 'Freckle Face', cursive;
+  font-size: 30px;
+  color: white;
+
+}
+
+.contact{
+  font-family: 'Cabin Sketch', cursive;
+  font-size:70px;
+}
+
+.contact2{
+  font-family: 'Pangolin', cursive;
+  font-size: 40px;
+
+}
+
+/* ALL fonts & size------------------------------------------------------------------------------.*/
+
+{
+  font-family: 'Pangolin', cursive;
+  font-size: 20px;
+  color: white;
+
+}
+
+.{
+  font-family: 'Lemonada', cursive;
+font-size: 20px;
+
+}
+
+{font-family: 'Knewave', cursive;
+  font-size: 20px;
+}
+
+{
+
+font-family: 'Courgette', cursive;
+font-size: 40px;
+}
+
+{
+  font-family: 'Freckle Face', cursive;
+
+}
+
+.me{
+
+  width:100%;height:100%; 
+
+
+
+}
+
+/*** End:; PARALLAX-- 
+
+font-family: 'Acme', sans-serif;
+font-family: 'Luckiest Guy', cursive;
+font-family: 'Merienda', cursive;
+font-family: 'Permanent Marker', cursive;
+font-family: 'Rock Salt', cursive;
+font-family: 'Special Elite', cursive;
+font-family: 'Yeon Sung', cursive;
+
+This code from W3schools */
+/* ALL THE fonts & size.*/
+/*-----------------------------*/
+
+
+/*-different frames for the txt and image---------------------------*/
+.subbox {
+  background-color: black;
+  border: 10px none;
+  padding: 0px;
+  margin-top: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.box0 {
+  background-color: black;
+  border: 00px none;
+  padding: 0px;
+  margin-top: 5px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+.column {
+  background-color: black;
+  border: 00px none;
+  padding: 0px;
+  margin-top: 5px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+/* rowssss------------------------------------------------------------------------ */
+.row1 {
+  background-color: none;
+  border: 15px none;
+  padding: 10px;
+  margin: 00px;
+}
+
+.row2 {
+  background-color: none;
+  border: 15px none;
+  padding: 0px;
+	margin: 10px;
+}
+
+.rowend {
+  background-color: black;
+  border: 50px none;
+  padding: 10px;
+  margin: 00px;
+  margin-bottom: 10%;
+}
+/*-MOBILE VERSION: ------------------------*/
+.row3 {
+  background-color: black;
+  border: 50px none;
+  padding: 10px;
+  margin: 00px;
+  margin-bottom: 0%;
+}
+.end{
+ 
+  color:white;
+  background-color:black;
+
+}
+/*-MOBILE VERSION: --END----------------------*/
+
+/*** bigger scree-Ipad Pro - PC -Macbook Pros- Imac */
+/*** bigger scree-Ipad Pro - PC -Macbook Pro- Imac */
+/*** bigger scree-Ipad Pro - PC -Macbook Pro- Imac */
+/*** bigger scree-Ipad Pro - PC -Macbook Pro- Imac */
+/*** bigger scree-Ipad Pro - PC -Macbook Pro- Imac */
+
+@media (min-width: 70em)
+{
+
+body{
+  background-color: black
+  ;
+
+}
+
+
+
+
+
+
+   a:link {
+  text-decoration: none;
+}
+/*-* nagvi bar *-------------------------------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------------------------------------------------------*/
+body {
+  margin: 0;
+  width:100%; margin:0px 0px 0px 0px; 
+  background-color: none;
+}
+
+
+
+
+body, html {
+  height: 100%; margin-left: 0%; margin-right: 0%;
+
+}
+.hero-image 
+{
+  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+  background-image: url("images/hero2.gif");
+  /* Set a specific height */
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center; 
+  height:130%; 
+  width: 100%;
+  background-color: none;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: relative;
+  top: 0%;
+  bottom: 100px;
+  margin-bottom: 10%;
+
+}
+
+
+/* Place text in the middle of the image */
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Cabin Sketch', cursive;
+  font-size: 45px;
+  color: white;
+  width: 550px;
+  height: 70px;
+
+}
+/* The hero image  size no bigger than 48em*/
+
+.knockout {
+  
+  vertical-align: middle;
+  text-align: center;
+
+  font-family: 'Frijole', cursive;
+  font-size:60pt;
+  color: white;
+  color: #fff;
+  background: linear-gradient(110deg, #ffffff 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(110deg, yellow 35%, #ffffff 34%);
+  background-size: 400%;
+   -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  margin-bottom: 5px;
+}
+.knockout{
+    animation: Gradient 5s ease infinite;
+    -webkit-animation: Gradient 15s ease infinite;
+    -moz-animation: Gradient 5s ease infinite;
+}
+
+@-webkit-keyframes Gradient { 0% {background-position: 20% 50%}
+                              50% {background-position: 35% 50%}
+                              100% {background-position: 40% 50%}
+                            }
+
+
+
+/* ALL USED  fonts & size.*/
+.heros {
+  font-family: 'Freckle Face', cursive;
+  font-size: 45px;
+  color:white;
+}
+
+.subtext {
+  font-family: 'Nerko One', cursive;
+  font-size: 45px;
+  color: white;
+}
+
+.text{
+  font-family: 'Pangolin', cursive;
+  font-size: 30px;
+  text-align: justify;
+  color: white;
+}
+
+.title{
+  font-family: 'Freckle Face', cursive;
+  font-size: 18px;
+  color: white;
+
+}
+
+.contact{
+  font-family: 'Cabin Sketch', cursive;
+  font-size:30px;
+  color: white;
+ 
+}
+
+.contact2{
+  font-family: 'Pangolin', cursive;
+  font-size: 20px;
+  color: white;
+ 
+}
+
+/* ALL USED  fonts & size.*//* ALL USED  fonts & size.*//* ALL USED  fonts & size.*//* ALL USED  fonts & size.*/
+
+
+.subbox {
+  background-color: none;
+  border: 10px none;
+  padding: 0px;
+  margin-top: 5%;
+  margin-right: 0px;
+  margin-left: 0px;
+  width: 98%;
+  margin-bottom: 2%;
+}
+
+
+
+
+.me{
+  width:60%;height:60%; 
+
+
+}
+
+
+
+/* rowssss---------four col layout------------------------------------- */
+
+.column {
+  background-color: black;
+  border: 00px none;
+  padding: 0px;  
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+  color: none;
+
+}
+
+
+.column {
+  float: left;
+  width: 25%;
+}
+
+/* Clear floats after the columns */
+.row00:after {
+  content: "";
+  display: table;
+  clear: both;
+
+}
+
+/* rowssss------four col layout--------------------------------------------------- */
+.row0 {
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 0px;
+      margin-bottom: 0px;
+      grid-template-areas: 
+      "imagesdie content content  ";
+      width: 100%;
+      margin-top: 0%;
+      margin-right: 0px;
+      margin-left: 0px;
+      color: none;
+
+}
+    
+
+.row1 {
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 00px;
+      margin-bottom: 0px;
+      grid-template-areas: 
+      "imagesdie imagesdie"
+      "imagesdie imagesdie";
+      width: 40%;
+      margin-top: 0%;
+      
+      margin-left: 0%;
+      color: none;
+      justify-content: center;
+      align-content: center;
+
+}
+
+.subbox {
+  background-color: black;
+  border: 10px none;
+  padding: 0px;
+  margin-top: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+
+.box0 {
+  background-color: black;
+  border: 00px none;
+  padding: 0px;  
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+  color: none;
+
+}
+.row3 {
+  background-color: black;
+  border: 50px none;
+  padding: 10px;
+  margin-top: 4%;
+  margin-bottom: 0%;
+}
+
+.rowend {
+  background-color: black;
+  border: 50px none;
+  padding: 10px;
+  margin: 00px;
+  margin-bottom: 30s%;
+
+}
+
+.end{
+ 
+  color:black;
+  background-color:black;
+
+}
+
+
+.individual-bubble {
+position: absolute;
+border-radius: 100%;
+bottom: 10px;
+background-color: yellow;
+z-index: 1;
+}
+
+
+.box
+    {
+      
+      border: opx solid #9325BC;
+      padding: 5px;
+    }
+    .box:hover
+    {
+      -moz-box-shadow: 0 0 10px black;
+      -webkit-box-shadow: 0 0 10px black;
+      box-shadow: 0 0 10px none;
+    }
+
+
+
+.center-outer {
+display: table;
+width: 100%;
+height: 20%;
+}
+
+.center-inner {
+display: table-cell;
+vertical-align: middle;
+text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+/* Essential CSS - Makes the effect work */
+
+
+
+
+
+/* EsThis code from W3schools */
+

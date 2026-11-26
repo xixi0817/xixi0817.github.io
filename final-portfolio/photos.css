@@ -1,0 +1,677 @@
+body{
+  background-color: black;
+}
+
+html, body {width: auto!important;} 
+
+/*-* nagvi bar *-------------------------------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------------------------------------------------------*/
+body {
+  margin: 0;
+  width:100%; margin:0px 0px 0px 0px; 
+  background-color: none;
+}
+
+a {
+  color: #000;
+}
+
+.header {
+  background: black;
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: fixed;
+  width: 100%;
+  padding: 00px;
+  z-index: 3;
+  font-family: 'Cabin Sketch', cursive;
+  font-size: 25px;
+
+}
+.header a{
+  color: white;
+
+
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+
+  
+}
+
+.header li a {
+  display: block;
+  padding: 5px 15px;
+  border-right: 1px solid #f4f4f4;
+  text-decoration: none;
+  color: white;
+  font-size: 33px;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: white;
+  color:black;
+  
+}
+
+.header .logo {
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 15px 15px 0px;
+  text-decoration: none;
+
+}
+
+/* menu */
+
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+
+}
+
+/* menu icon */
+
+.header .menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 40px 20px;
+  position: relative;
+  user-select: none;
+  border-color: white;
+}
+
+.header .menu-icon .navicon {
+  background: white;
+  display: block;
+  height: 3px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 30px;
+ 
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+  background: white;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+  top: 8px;
+}
+
+.header .menu-icon .navicon:after {
+  top: -8px;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 240px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+
+/* 48em = 768px for nagvi bar */
+
+@media (min-width: 70em) {
+  
+  .header {
+  background-color: black;
+  font-size: 25px;
+  
+ }
+  .header a{
+  background-color: black;
+  color: black;
+ 
+ }
+
+  .header li {
+    float: left;
+    
+  }
+  .header li a {
+    padding: 20px 30px;
+    color: white;
+    font-size: 25px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+  .header .menu-icon {
+    display: none;
+  }
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: white;
+  color: black;
+  
+}
+
+.header .logo {
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 15px 15px 0px;
+  text-decoration: none;
+  color: white;
+}
+
+}
+/*---ENDS  navi bar----------------------------------------------------------------------------------------------*/
+
+/* -------special effects for sub title */
+
+.border{
+  padding: 30px;
+  background: linear-gradient(110deg, #ffeead 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(110deg, #C5E7D7 34%, #88d8b0 34%);
+  background-size: 400% 400%;
+  height: 100px;
+  background-position: 25% 50%;
+  -webkit-animation: Gradient 15s ease infinite;
+  -moz-animation: Gradient 5s ease infinite;
+  margin-top: 20%;
+  background-color: white;
+}
+.inner-cutout{
+  padding: 40px 0;
+  display: block;
+  background-color:#ffffff;/*#ff6f69*/
+  
+  margin: 2%;
+  padding-bottom: 40px;
+  height: 20px;
+  background: radial-gradient(#ff6069, #ff8b87);
+  background-size: 300%;
+  background-position:50% 50%;
+
+}
+
+.knockout {
+  
+  vertical-align: middle;
+  text-align: center;
+  font-family: 'Frijole', cursive;
+  font-size: 22pt;
+  color: black;
+  color: #fff;
+  background: linear-gradient(110deg, #ffffff 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(110deg, yellow 36%, #ffffff 34%);
+  background-size: 400%;
+   -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  margin-bottom: 5px;
+}
+
+.knockout{
+    animation: Gradient 5s ease infinite;
+    -webkit-animation: Gradient 15s ease infinite;
+    -moz-animation: Gradient 5s ease infinite;
+}
+
+@-webkit-keyframes Gradient {
+  0% {
+    background-position: 20% 50%
+  }
+  50% {
+    background-position: 35% 50%
+  }
+  100% {
+    background-position: 40% 50%
+  }
+  
+}
+
+
+
+/* -------special effects for sub titleE END ___________________ */
+/* ALL USED  fonts & size.*/
+.heros {
+  font-family: 'Freckle Face', cursive;
+  font-size: 45px;
+  color:white;
+}
+
+.subtext {
+  font-family: 'Nerko One', cursive;
+  font-size: 65px;
+  color: white;
+}
+
+.text0{
+  font-family: 'Pangolin', cursive;
+  font-size: 20px;
+  text-align: justify;
+  color: white;
+}
+
+.title{
+  font-family: 'Freckle Face', cursive;
+  font-size: 18px;
+  color: yellow;
+  opacity: 65%;
+
+}
+.titlem{
+  font-family: 'Freckle Face', cursive;
+  font-size: 35px;
+  color: yellow;
+  opacity: 65%;
+
+}
+.endwork{
+  
+   font-family: 'Freckle Face', cursive;
+  font-size: 18px;
+  color: yellow;
+  opacity: 65%;
+}
+
+
+.contact{
+  font-family: 'Cabin Sketch', cursive;
+  font-size:70px;
+  color: white;
+}
+
+.contact2{
+  font-family: 'Pangolin', cursive;
+  font-size: 40px;
+  color: white;
+}
+
+}
+
+/* ALL fonts & size------------------------------------------------------------------------------.*/
+
+
+.subbox {
+  background-color: none;
+  border: 10px none;
+  padding: 100px 20px;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Slideshow container *//* Slideshow container *//* Slideshow container */
+/* Slideshow container *//* Slideshow container *//* Slideshow container */
+/* Slideshow container *//* Slideshow container *//* Slideshow container */
+
+
+
+/*-MOBILE VERSION: --END----------------------*/
+
+/*** bigger scree-Ipad Pro - PC -Macbook Pro- Imac */
+/*** bigger scree-Ipad Pro - PC -Macbook Pro- Imac */
+/*** bigger scree-Ipad Pro - PC -Macbook Pro- Imac */
+/*** bigger scree-Ipad Pro - PC -Macbook Pro- Imac */
+/*** bigger scree-Ipad Pro - PC -Macbook Pro- Imac */
+
+@media (min-width: 70em)
+{
+
+body{
+  background-color: black;
+}.
+
+.me{
+  width:50%;height:50%; 
+
+
+}
+
+.knockout {
+  
+  vertical-align: middle;
+  text-align: center;
+
+  font-family: 'Frijole', cursive;
+  font-size:60pt;
+  color: white;
+  color: white;
+  background: linear-gradient(110deg, white 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(110deg, yellow 35%, white 34%);
+  background-size: 400%;
+   -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  margin-bottom: 5px;
+}
+.knockout{
+    animation: Gradient 5s ease infinite;
+    -webkit-animation: Gradient 15s ease infinite;
+    -moz-animation: Gradient 5s ease infinite;
+}
+
+@-webkit-keyframes Gradient 
+  { 0% {background-position: 20% 50%} 50% {background-position: 35% 50%} 100% {background-position: 40% 50%}
+  }
+
+
+
+   .row0{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      column-gap: 10px;
+      margin-bottom: 0px;
+      grid-template-areas: 
+      "imageaside imageaside imageaside";
+       width: 100%;
+
+    }
+
+
+
+.box {
+
+  
+  border: 10px none;
+  padding: 0px;
+  margin: 10px;
+
+}
+
+.boxv {
+
+  
+  border: 0px none;
+  padding: 0px;
+  margin: 0px;
+
+}
+
+
+/* Create three unequal columns that floats next to each other */
+* {
+  box-sizing: border-box;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+
+  height: 0px; /* Should be removed. Only for demonstration */
+}
+
+.left, .right {
+  width: 20%;
+  background-color: 
+}
+
+.middle {
+  width: 60%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+  color:white;
+}
+
+
+
+.title{
+  font-family: 'Freckle Face', cursive;
+  font-size: 20px;
+  color:  yellow;
+  opacity: 70%;
+
+}
+.titlem{
+  font-family: 'Freckle Face', cursive;
+  font-size: 45px;
+  color:  yellow;
+ opacity: 70%;
+
+}
+.endwork{
+  
+   font-family: 'Freckle Face', cursive;
+  font-size: 25px;
+  color:  yellow;
+  opacity: 70%;
+}
+
+
+
+
+
+
+.text0{
+  font-family: 'Pangolin', cursive;
+  font-size: 20px;
+  text-align: justify;
+  color: white;
+}
+
+
+.contact{
+  font-family: 'Cabin Sketch', cursive;
+  font-size:40px;
+  color: white;
+ 
+}
+
+.contact2{
+  font-family: 'Pangolin', cursive;
+  font-size: 30px;
+  color: white;
+ 
+}
+
+
+
+
+
+
+/* Style the Image Used to Trigger the Modal */
+#myimg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myimg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+
+
+
+
+
+
+
+}
+
+
+
+/*---Keep more future-----------
+
+
+
+
+
+
+   <center><p class="titlem" style="margin-top: 5%;"> More Works</p>
+      <br>
+      <p class="endwork" style="margin-top: 5%;">Here is more Works for my photography projects. Thank You!</p></center>
+    </div>
+
+
+  <div class="column middle" >
+   
+
+<div class="slideshow-container">
+
+<div class="mySlides fade">
+  <div class="numbertext">1 / 16</div>
+  <img src="images/ps1.jpg" style="width:100%">
+  <div class="text">Digital Camera: &nbspStill Life 1</div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">2 / 16</div>
+  <img src="images/ps2.jpg" style="width:100%">
+  <div class="text">Digital Camera: &nbspStill Life 2</div>
+</div>
+
+
+
+
+
+
+
+<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+<a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span> 
+  <span class="dot" onclick="currentSlide(2)"></span> 
+  
+              
+
+</div>
+
+<script>
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+}
+</script>
+
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------*/
+
+/* -------special effects for sub title */
