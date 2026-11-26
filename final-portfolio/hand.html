@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Hand Drawing</title>
+	<link rel="stylesheet" type="text/css" href="hand.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" type="text/css" href="skeleton.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="jquery.min.js"></script>
+    
+    <script src="bubble.js"></script>
+     <script src="jquery.zoom.min.js"></script>
+      <script src="jquery.zoom.js"></script>
+      <link href="css/lightbox.css" rel="stylesheet" type="text/css"/>
+      <script src="css/lightbox.js"></script>
+        <script src="js/lightbox-plus-jquery.min.js"></script>
+	<!-- NOTES more FONTS need to updated 
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link href="https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&family=Cabin+Sketch:wght@400;700&family=Courgette&family=Finger+Paint&family=Freckle+Face&family=Frijole&family=Knewave&family=Lemonada&family=Pangolin&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.gstatic.com"> <link href="https://fonts.googleapis.com/css2?family=Acme&family=Luckiest+Guy&family=Merienda:wght@400;700&family=Permanent+Marker&family=Rock+Salt&family=Special+Elite&family=Yeon+Sung&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.gstatic.com"> 
+  	<link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
+
+  <style>
+  .block0 img {  
+  max-width: 100%;  
+  height: auto; 
+  position: center;
+  }
+
+  * {box-sizing: border-box}
+body {font-family: Verdana, sans-serif; margin:0}
+.mySlides {display: none}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+ 
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  background-color: black; opacity: 20%;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 25px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+  font-family: 'Freckle Face', cursive;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #dda0dd;
+  
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 70em) {
+	.text {
+  font-size: 15px;background-color: ;}
+  .prev, .next{
+  	font-size: 15px; background-color: black; opacity: 30%;}
+  .active, .dot:hover {
+  background-color: yellow;
+  opacity: 65%;;
+}
+}
+</style>
+</head>
+
+
+
+<!-- STYLE nagvi bar  FROM 3WSCHOOLS
+––––––––––––––––––––s–––––––––––––––––––––––––––––– -->
+<!-- Note: Nagiv Bar... This code from W3schools!!!! -->
+<body>
+	<header class="header">
+  	 <a href="final.html" class="logo">Xixi Lin</a>
+  		<input class="menu-btn" type="checkbox" id="menu-btn" />
+  		<label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+  	 <ul class="menu">
+    	<li><a href="final.html#0">About me</a></li>
+   		<li><a href="final.html#1">Projects</a></li>
+    	
+  	 </ul>
+	</header>
+
+
+
+	 <div class="subbox">
+      
+          <center>
+      <p class="knockout" style="margin-top: 0%;">HAND DRAWING</p><
+        </center>
+</div>
+	
+
+
+	<div class="row0">
+
+  		<div class="box0">
+
+    
+
+      		<center><img class="me" src="images/handpaintings/hand1.jpg" style="width:90%;height:90%; margin-top: 5%;"></center>
+      		<center><p class="title" style="margin-top: 5%;">"Morden Princess": &nbspMermaid & The Voice of The World</p></center></a>
+ 		
+
+    </div>
+
+
+
+
+
+		<div class="box0">
+      		<center><img class="me" src="images/handpaintings/hand2.jpg" style="width:90%;height:90%;  margin-top: 5%;"></center>
+      		<center><p class="title" style="margin-top: 5%;">"Morden Princess": &nbspRapunzel & World Guinness Record</p></center>
+  		</div>
+		<div class="box0">
+        <div class="textbox">
+      		<center><p class="text0" style="margin-right: 5%; margin-left: 5%; margin-top: 5%;">For this project: what I want to do is "rewrite" the stories for all the princesses. Why do they need help from others? Why do all the stories have bad characters? I just want things to be good, like no evil. It sounds very childish, but I will make it happen in my illustrations.<br><br>1: Little Mermaid, No more sacrifices her life for a man. No more sacrificing her talented and beautiful voice. Let her go where she wants to go. Let the world hear her voice. Let her make herself proud.<br><br>2: Rapunzel was like a prisoner in a big tower for over 15 years. She has no life, no friends, all she has is just her long hair. So what not let her hold a World Guinness Records, she can get interviews on TV, and a lovely boy who supports her career. She is going to be a life winner. </p>
+
+          </center>
+        </div>
+  		</div>
+	</div>
+
+	<div class="row0">
+
+		<div class="box0">
+      <div class="textbox">
+      		  <center><p class="text0" style="margin-right: 5%; margin-left: 5%;margin-top: 5%;"> The same concepts for the other two.
+            <br><br>3: Cinderella, No more unfriendly stepsisters or steps mothers. This is just her first day of college. She is a normal girl who has a big and lovely family.<br><br>4: Snow White has a bad stepmother, who is mean and wants to kill her. She had to live in the forest and got poisoned. She was saved by a prince in the end. No offense, what kind of princes will kiss a dead body? I feel like she needs a different life, so why not let her drive a fancy car on the highway. She got pulled over by a police officer, probably she drove too fast. So what? (of course, do not drive too fast in real life, this is just an illustration after all) She deserves free and wildlife. She does not need a man to kiss her to save her. She can be her lifesaver.</p>
+
+          </center>
+  		</div>
+    </div>
+  		<div class="box0">
+      		<center><img class="me" src="images/handpaintings/hand3.jpg" style="width:90%;height:90%; margin-top: 5%;"></center>
+      		<center><p class="title" style="width:90%;height:90%; margin-top: 5%;">"Morden Princess": &nbspCinderella & First day College</p></center>
+ 		</div>
+		<div class="box0">
+      		<center><img class="me" src="images/handpaintings/hand4.jpg" style="width:90%;height:90%; margin-top: 5%;"></center>
+      		<center><p class="title" style="width:90%;height:90%; margin-top: 5%;">"Morden Princess": &nbspSnow White & Car Racing</p></center>
+  		</div>
+		
+	</div>
+
+
+
+	<div class="row0">
+
+  		<div class="box0">
+
+      		<center><img class="me" src="images/handpaintings/hand5.jpg" style="width:90%;height:90%; margin-top: 5%;"></center>
+      		<center><p class="title" style="margin-top: 5%;">"Why Women Kill": 10:00 AM</p></center>
+      	</div>	
+		<div class="box0">
+      		<center><img class="me" src="images/handpaintings/hand6.jpg" style="width:90%;height:90%;  margin-top: 5%;"></center>
+      		<center><p class="title" style="margin-top: 5%;">"Why Women Kill": 10:00 AM</p></center>
+  		</div>
+		<div class="box0">
+      <div class="textbox">
+      		<center><p class="text0" style="margin-right: 5%; margin-left: 5%;"> This is a projcet that I got inspired by a TV Show named "Why Women Kill". <br><br><i>Why Women Kill is an American dark comedy-drama anthology television series created by Marc Cherry for CBS All Access. Set in multiple time periods, the series depicts the events leading to a death that occurs after the respective husbands of three married women commit adultery.</i> </p></center>
+        </div>
+  		</div>
+	</div>
+
+	<div class="row0">
+
+		<div class="box0">
+      <div class="textbox">
+      		<center><p class="text0" style="margin-right: 5%; margin-left: 5%;">My project is to draw a day of life. <br><br>The "10AM" section is in a daytime, wife found out that the husband is cheating on her, she got very upset and mad. She decided to kill the husband for revange.<br><br>The "10PM" section is in a night time, the wife is mad at husband leave all the housework to her. He just watching TV whole day, and he did not appreciate what she did for the family. <br><br>The TV Show actually is more interesting than my illustration. I highly recommend this show to all of you. </p></center>
+  		</div>
+    </div>
+
+  		<div class="box0">
+      		<center><img class="me" src="images/handpaintings/hand7.jpg" style="width:90%;height:90%;  margin-top: 5%;"></center>
+      		<center><p class="title" style="margin-top: 5%;">"Why Women Kill": 10:00 PM</p></center>
+ 		</div>
+		<div class="box0">
+      			<center><img class="me" src="images/handpaintings/hand8.jpg" style="width:90%;height:90%; margin-top: 5%;"></center>
+      		<center><p class="title" style="margin-top: 5%;">"Why Women Kill": 10:00 PM</p></center>
+		</div>
+	</div>
+
+
+	
+
+
+
+
+
+  </div>
+  
+
+
+
+ 
+</div>
+
+
+    
+ <!-- Note:  This code from W3schools!!!! -->
+<!-- Container for the image gallery -->
+
+
+<!-- Note: ... This code from W3schools!!!! -->
+ 
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
