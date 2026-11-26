@@ -161,6 +161,24 @@
       background: radial-gradient(circle at 30% 25%, #fbf8f2 0, #ece4d4 100%);
     }
     .work-slide .w-ph.w-soon { font-family: "DM Serif Display", serif; font-size: 20px; color: rgba(17,17,17,0.45); }
+    /* Hover card: image blurs, gray band with title and Visit button */
+    .w-hover img { transition: filter 0.3s ease; }
+    .w-over {
+      position: absolute; left: 0; right: 0; top: 18%; bottom: 18%;
+      display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+      padding: 0 16px; background: rgba(190, 190, 190, 0.78);
+      opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
+    }
+    .work-slide.on .w-hover:hover img { filter: blur(3px); }
+    .work-slide.on .w-hover:hover .w-over,
+    .work-slide.on .w-hover:focus-within .w-over { opacity: 1; pointer-events: auto; }
+    .w-over-title { font-family: "DM Serif Display", serif; font-size: 18px; line-height: 1.2; color: #111; }
+    .w-over-sub { font-size: 13px; color: #111; margin-top: 4px; }
+    .w-over .w-visit {
+      display: inline-block; margin-top: 12px; padding: 5px 28px; border-radius: 4px;
+      background: #f39a1f; color: #fff; font-size: 14px; font-weight: 500; text-decoration: none;
+    }
+    .w-over .w-visit:hover { background: #e08812; }
     .w-cap { text-align: center; margin-top: 10px; transition: opacity 0.3s ease; }
     .w-title { font-weight: 600; font-size: 15px; color: var(--ink); }
     .w-desc { font-size: 13px; color: var(--muted); line-height: 1.45; margin-top: 2px; }
@@ -174,7 +192,6 @@
       transition: background 0.2s ease;
     }
     .work-nav button.arrow:hover { background: #444; }
-    .work-all { text-align: center; margin-top: 14px; font-size: 14px; font-weight: 500; }
     .work-dots { display: flex; gap: 8px; align-items: center; }
     .work-dots button {
       width: 7px; height: 7px; border-radius: 4px; border: none; padding: 0; cursor: pointer;
@@ -540,40 +557,26 @@
         <p class="life-intro work-intro">Side Projects: Website designs, illustrations, and videos from before and outside of data.</p>
         <div class="work-carousel" id="work-carousel">
             <div class="work-slide">
-              <a class="w-link" href="side-projects.html#website">
-                <div class="w-img"><img src="images/side-website.jpg" alt="Home page of my illustration portfolio website" loading="lazy"></div>
-                <div class="w-cap"><div class="w-title">Portfolio Website</div><div class="w-desc">Hand-coded in HTML, CSS, and JavaScript</div></div>
-              </a>
+              <div class="w-img w-hover">
+                <img src="images/side-liqingzhao.jpg" alt="Painting of the poet Li Qingzhao holding a brush">
+                <div class="w-over">
+                  <div class="w-over-title">Website Course Project</div>
+                  <div class="w-over-sub">Chinese Female Poet</div>
+                  <a class="w-visit" href="/art_portfolio/">Visit</a>
+                </div>
+              </div>
             </div>
             <div class="work-slide">
-              <a class="w-link" href="side-projects.html#prince">
-                <div class="w-img"><video src="images/side-prince.mp4" poster="images/side-prince.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Drawing process of the King from The Little Prince"></video></div>
-                <div class="w-cap"><div class="w-title">The Little Prince</div><div class="w-desc">Character illustrations and drawing process videos</div></div>
-              </a>
+              <div class="w-img"><div class="w-ph w-soon">Coming soon</div></div>
             </div>
             <div class="work-slide">
-              <a class="w-link" href="side-projects.html#album">
-                <div class="w-img"><img src="images/side-album.jpg" alt="Album cover illustration for Zhou Shen" loading="lazy"></div>
-                <div class="w-cap"><div class="w-title">Zhou Shen Album Art</div><div class="w-desc">Album cover, poster, and stickers</div></div>
-              </a>
+              <div class="w-img"><div class="w-ph w-soon">Coming soon</div></div>
             </div>
             <div class="work-slide">
-              <a class="w-link" href="side-projects.html#scooter">
-                <div class="w-img"><img src="images/side-scooter.jpg" alt="Magazine spread with e-scooter illustrations" loading="lazy"></div>
-                <div class="w-cap"><div class="w-title">The E-Scooters Revolution</div><div class="w-desc">Editorial illustration and magazine layout</div></div>
-              </a>
+              <div class="w-img"><div class="w-ph w-soon">Coming soon</div></div>
             </div>
             <div class="work-slide">
-              <a class="w-link" href="side-projects.html#space">
-                <div class="w-img"><img src="images/side-3d.jpg" alt="3D render of a work studio" loading="lazy"></div>
-                <div class="w-cap"><div class="w-title">Space I Am</div><div class="w-desc">3D model of a work studio based on my illustration</div></div>
-              </a>
-            </div>
-            <div class="work-slide">
-              <a class="w-link" href="side-projects.html#vector">
-                <div class="w-img"><img src="images/side-vector.jpg" alt="Vector self-portrait with a snowboard" loading="lazy"></div>
-                <div class="w-cap"><div class="w-title">Vector Illustration</div><div class="w-desc">Self-portrait and class exercises in Illustrator</div></div>
-              </a>
+              <div class="w-img"><div class="w-ph w-soon">Coming soon</div></div>
             </div>
         </div>
         <div class="work-nav">
@@ -581,7 +584,6 @@
           <div class="work-dots" id="work-dots"></div>
           <button class="arrow" id="work-next" aria-label="Next">&#8250;</button>
         </div>
-        <p class="work-all"><a href="side-projects.html">See all side projects &rarr;</a></p>
       </div>
     </section>
   </main>
